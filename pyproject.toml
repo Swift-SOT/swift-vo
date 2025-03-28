@@ -13,7 +13,12 @@ classifiers = [
 ]
 dynamic = ["version"]
 requires-python = ">=3.12"
-dependencies = ["astropy", "swifttools", "fastapi"]
+dependencies = [
+    "astropy",
+ "swifttools",
+ "fastapi",
+ "ipykernel>=6.29.5",
+]
 
 [project.urls]
 "Source Code" = "https://github.com/Swift-SOT/swift-vo"
