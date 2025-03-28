@@ -46,7 +46,7 @@ pyasn1==0.4.8
     #   rsa
 pydantic==2.10.6
     # via fastapi
-pydantic-core==2.27.2
+pydantic-core==2.33.0
     # via pydantic
 pyerfa==2.0.1.5
     # via astropy
