@@ -7,8 +7,6 @@ anyio==4.9.0
     #   httpx
     #   jupyter-server
     #   starlette
-appnope==0.1.4
-    # via ipykernel
 argon2-cffi==23.1.0
     # via jupyter-server
 argon2-cffi-bindings==21.2.0
@@ -76,6 +74,8 @@ filelock==3.18.0
     # via virtualenv
 fqdn==1.5.1
     # via jsonschema
+gunicorn==23.0.0
+    # via swift-vo (pyproject.toml)
 h11==0.14.0
     # via httpcore
 httpcore==1.0.7
@@ -223,6 +223,7 @@ overrides==7.7.0
 packaging==24.2
     # via
     #   astropy
+    #   gunicorn
     #   ipykernel
     #   jupyter-events
     #   jupyter-server

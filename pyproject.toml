@@ -15,9 +15,10 @@ dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = [
     "astropy",
- "swifttools",
- "fastapi",
- "ipykernel>=6.29.5",
+    "swifttools",
+    "fastapi",
+    "ipykernel>=6.29.5",
+    "gunicorn>=23.0.0",
 ]
 
 [project.urls]
