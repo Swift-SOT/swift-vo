@@ -2,7 +2,7 @@ from astropy.time import Time  # type: ignore[import-untyped]
 from pydantic import BaseModel, Field
 
 
-def mjdnow():
+def mjdnow() -> float:
     """Return the current time in MJD."""
     return Time.now().mjd
 
@@ -17,7 +17,9 @@ class VOTimeRange(BaseModel):
     def from_string(cls, value: str) -> "VOTimeRange":
         """Parses 'T_MIN,T_MAX' string format into TimeRange object."""
         try:
-            t_min, t_max = map(float, value.split("/"))
+            tmin, tmax = value.split("/")
+            t_min = float(tmin) if tmin else mjdnow()
+            t_max = float(tmax)
             return cls(t_min=t_min, t_max=t_max)
         except ValueError as e:
             raise ValueError(
