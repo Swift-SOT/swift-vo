@@ -40,7 +40,7 @@ packaging==24.2
     # via astropy
 pandas==2.2.3
     # via swifttools
-pyasn1==0.4.8
+pyasn1==0.6.1
     # via
     #   python-jose
     #   rsa
