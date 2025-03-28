@@ -94,6 +94,7 @@ iniconfig==2.1.0
     # via pytest
 ipykernel==6.29.5
     # via
+    #   swift-vo (pyproject.toml)
     #   jupyter
     #   jupyter-console
     #   jupyterlab
