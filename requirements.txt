@@ -10,7 +10,7 @@ astropy-iers-data==0.2025.3.24.0.35.32
     # via astropy
 boto3==1.37.21
     # via swifttools
-botocore==1.37.21
+botocore==1.37.22
     # via
     #   boto3
     #   s3transfer
