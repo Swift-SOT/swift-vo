@@ -18,7 +18,7 @@ def parse_time(TIME: str = Query(..., description="Time range in 'T_MIN/T_MAX' f
     return VOTimeRange.from_string(TIME)
 
 
-def parse_min_obs(MIN_OBS: float = Query(..., description="Minimum observation threshold")) -> float:
+def parse_min_obs(MIN_OBS: float = Query(default=0, description="Minimum observation threshold")) -> float:
     """Parses the minimum observation threshold."""
     return float(MIN_OBS)
 
@@ -28,8 +28,10 @@ async def objvissap(
     position: VOPosition = Depends(parse_pos),
     time: VOTimeRange = Depends(parse_time),
     min_obs: float = Depends(parse_min_obs),
-    MAX_REC: int | None = None,
-    UPLOAD: str | None = None,
+    MAX_REC: int | None = Query(default=None, description="Maximum number of records to return"),
+    UPLOAD: str | None = Query(
+        default=None, description="Not used for ObjObsSAP, but included for consistency"
+    ),
 ):
     """Handles the query for ObjObjSAP."""
     vo = ObjObsSAPService(
