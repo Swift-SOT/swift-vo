@@ -28,10 +28,18 @@ async def objvissap(
     position: VOPosition = Depends(parse_pos),
     time: VOTimeRange = Depends(parse_time),
     min_obs: float = Depends(parse_min_obs),
+    MAX_REC: int | None = None,
+    UPLOAD: str | None = None,
 ):
     """Handles the query for ObjObjSAP."""
     vo = ObjObsSAPService(
-        s_ra=position.s_ra, s_dec=position.s_dec, t_min=time.t_min, t_max=time.t_max, min_obs=min_obs
+        s_ra=position.s_ra,
+        s_dec=position.s_dec,
+        t_min=time.t_min,
+        t_max=time.t_max,
+        min_obs=min_obs,
+        max_rec=MAX_REC,
+        upload=UPLOAD,
     )
     vo.query()
     xml_data = vo.vo_format()
