@@ -1,4 +1,5 @@
 from astropy.time import Time  # type: ignore[import-untyped]
+from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
 
@@ -22,8 +23,9 @@ class VOTimeRange(BaseModel):
             t_max = float(tmax)
             return cls(t_min=t_min, t_max=t_max)
         except ValueError as e:
-            raise ValueError(
-                f"Invalid time range format: {value}. Expected 'T_MIN,T_MAX' (e.g., '59000,59001')."
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid time range format: {value}. Expected 'T_MIN/T_MAX' (e.g., '59000/59001').",
             ) from e
 
 
@@ -40,7 +42,10 @@ class VOPosition(BaseModel):
             ra, dec = map(float, value.split(","))
             return cls(s_ra=ra, s_dec=dec)
         except ValueError as e:
-            raise ValueError(f"Invalid RA/DEC format: {value}. Expected 'RA,DEC' (e.g., '34,-23.3').") from e
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid position format: {value}. Expected 'RA,DEC' (e.g., '34,-23.3').",
+            ) from e
 
 
 class ObjObsSAPQueryParameters(BaseModel):
