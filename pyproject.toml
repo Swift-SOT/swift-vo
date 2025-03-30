@@ -12,12 +12,11 @@ classifiers = [
     "Programming Language :: Python",
 ]
 dynamic = ["version"]
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
     "astropy",
     "swifttools",
     "fastapi[standard]",
-    "ipykernel>=6.29.5",
     "gunicorn>=23.0.0",
     "uvicorn>=0.34.0",
     "asyncer>=0.0.8",
@@ -36,6 +35,7 @@ dev = [
     "pytest",
     "pytest-cov", # Used to report total code coverage
     "ruff",       # Used for static linting of files
+    "ipykernel",
 ]
 
 [build-system]
