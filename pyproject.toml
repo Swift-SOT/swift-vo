@@ -104,4 +104,4 @@ ignore = [
 swift_vo = ["py.typed"]
 
 [tool.coverage.run]
-omit = ["src/swift_vo/_version.py"]
+omit = ["swift_vo/_version.py"]
