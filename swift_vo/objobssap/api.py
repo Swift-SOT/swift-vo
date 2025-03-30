@@ -23,7 +23,20 @@ def parse_min_obs(MIN_OBS: float = Query(default=0, description="Minimum observa
     return float(MIN_OBS)
 
 
-@router.get("/query")
+@router.get(
+    "/query",
+    response_class=Response,
+    responses={
+        200: {
+            "content": {
+                "application/xml": {
+                    "example": "<note><to>User</to><from>Server</from><message>Hello, XML!</message></note>"
+                }
+            },
+            "description": "Returns an XML response",
+        }
+    },
+)
 async def objvissap(
     position: VOPosition = Depends(parse_pos),
     time: VOTimeRange = Depends(parse_time),
