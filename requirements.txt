@@ -3,7 +3,12 @@
 annotated-types==0.7.0
     # via pydantic
 anyio==4.9.0
-    # via starlette
+    # via
+    #   httpx
+    #   starlette
+    #   watchfiles
+appnope==0.1.4
+    # via ipykernel
 astropy==7.0.1
     # via swift-vo (pyproject.toml)
 astropy-iers-data==0.2025.3.24.0.35.32
@@ -17,30 +22,52 @@ botocore==1.37.22
     #   boto3
     #   s3transfer
 certifi==2025.1.31
-    # via requests
+    # via
+    #   httpcore
+    #   httpx
+    #   requests
 charset-normalizer==3.4.1
     # via requests
 click==8.1.8
-    # via uvicorn
+    # via
+    #   rich-toolkit
+    #   typer
+    #   uvicorn
 comm==0.2.2
     # via ipykernel
 debugpy==1.8.13
     # via ipykernel
 decorator==5.2.1
     # via ipython
+dnspython==2.7.0
+    # via email-validator
 ecdsa==0.19.1
     # via python-jose
+email-validator==2.2.0
+    # via fastapi
 executing==2.2.0
     # via stack-data
 fastapi==0.115.12
     # via swift-vo (pyproject.toml)
+fastapi-cli==0.0.7
+    # via fastapi
 gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
 h11==0.14.0
+    # via
+    #   httpcore
+    #   uvicorn
+httpcore==1.0.7
+    # via httpx
+httptools==0.6.4
     # via uvicorn
+httpx==0.28.1
+    # via fastapi
 idna==3.10
     # via
     #   anyio
+    #   email-validator
+    #   httpx
     #   requests
 ipykernel==6.29.5
     # via swift-vo (pyproject.toml)
@@ -50,6 +77,8 @@ ipython-pygments-lexers==1.1.1
     # via ipython
 jedi==0.19.2
     # via ipython
+jinja2==3.1.6
+    # via fastapi
 jmespath==1.0.1
     # via
     #   boto3
@@ -60,10 +89,16 @@ jupyter-core==5.7.2
     # via
     #   ipykernel
     #   jupyter-client
+markdown-it-py==3.0.0
+    # via rich
+markupsafe==3.0.2
+    # via jinja2
 matplotlib-inline==0.1.7
     # via
     #   ipykernel
     #   ipython
+mdurl==0.1.2
+    # via markdown-it-py
 nest-asyncio==1.6.0
     # via ipykernel
 numpy==2.2.4
@@ -107,27 +142,42 @@ pygments==2.19.1
     # via
     #   ipython
     #   ipython-pygments-lexers
+    #   rich
 python-dateutil==2.9.0.post0
     # via
     #   botocore
     #   jupyter-client
     #   pandas
+python-dotenv==1.1.0
+    # via uvicorn
 python-jose==3.4.0
     # via swifttools
+python-multipart==0.0.20
+    # via fastapi
 pytz==2025.2
     # via pandas
 pyyaml==6.0.2
-    # via astropy
+    # via
+    #   astropy
+    #   uvicorn
 pyzmq==26.3.0
     # via
     #   ipykernel
     #   jupyter-client
 requests==2.32.3
     # via swifttools
+rich==13.9.4
+    # via
+    #   rich-toolkit
+    #   typer
+rich-toolkit==0.14.1
+    # via fastapi-cli
 rsa==4.9
     # via python-jose
 s3transfer==0.11.4
     # via boto3
+shellingham==1.5.4
+    # via typer
 six==1.17.0
     # via
     #   ecdsa
@@ -154,12 +204,16 @@ traitlets==5.14.3
     #   jupyter-client
     #   jupyter-core
     #   matplotlib-inline
+typer==0.15.2
+    # via fastapi-cli
 typing-extensions==4.13.0
     # via
     #   anyio
     #   fastapi
     #   pydantic
     #   pydantic-core
+    #   rich-toolkit
+    #   typer
     #   typing-inspection
 typing-inspection==0.4.0
     # via pydantic
@@ -170,6 +224,15 @@ urllib3==2.3.0
     #   botocore
     #   requests
 uvicorn==0.34.0
-    # via swift-vo (pyproject.toml)
+    # via
+    #   swift-vo (pyproject.toml)
+    #   fastapi
+    #   fastapi-cli
+uvloop==0.21.0
+    # via uvicorn
+watchfiles==1.0.4
+    # via uvicorn
 wcwidth==0.2.13
     # via prompt-toolkit
+websockets==15.0.1
+    # via uvicorn
