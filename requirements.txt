@@ -169,7 +169,7 @@ pyzmq==26.3.0
     #   jupyter-client
 requests==2.32.3
     # via swifttools
-rich==13.9.4
+rich==14.0.0
     # via
     #   rich-toolkit
     #   typer
