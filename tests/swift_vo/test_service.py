@@ -255,3 +255,27 @@ class TestObjObsSAPService:
         result = await service.vo_format()
         print(result)
         assert '<INFO ID="UPLOAD" name="UPLOAD" value="test.xml"/>' in result
+
+    @pytest.mark.asyncio
+    async def test_windows_start_time_in_xml(self):
+        """Test if windows start time is included in XML."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        service.windows = [(60000.0, 60001.0)]
+        result = await service.vo_format()
+        assert "<TD>60000</TD>" in result
+
+    @pytest.mark.asyncio
+    async def test_windows_stop_time_in_xml(self):
+        """Test if windows stop time is included in XML."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        service.windows = [(60000.0, 60001.0)]
+        result = await service.vo_format()
+        assert "<TD>60001</TD>" in result
+
+    @pytest.mark.asyncio
+    async def test_windows_duration_in_xml(self):
+        """Test if windows duration is included in XML."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        service.windows = [(60000.0, 60001.0)]
+        result = await service.vo_format()
+        assert "<TD>86400</TD>" in result
