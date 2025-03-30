@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from astropy.time import Time  # type: ignore[import-untyped]
+import pytest  # type: ignore[import-untyped]
+from astropy.time import Time
 
 from swift_vo.objobssap.service import ObjObsSAPService
 
@@ -72,3 +73,70 @@ class TestObjObsSAPService:
         """Test if t_max is of datetime type."""
         service = ObjObsSAPService(10.5, 20.3, 59000, 59001, 1500)
         assert service.t_min == Time(59000, format="mjd").datetime
+
+    @pytest.mark.asyncio
+    async def test_vo_format_hard_coded_header(self):
+        """Test if vo_format_hard_coded includes correct header information."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        result = await service.vo_format_hard_coded()
+
+        assert '<?xml version="1.0" encoding="UTF-8"?>' in result
+        assert "<VOTABLE" in result
+        assert "xsi:noNamespaceSchemaLocation" in result
+        assert 'version="1.0">' in result
+
+    @pytest.mark.asyncio
+    async def test_vo_format_hard_coded_description(self):
+        """Test if vo_format_hard_coded includes correct description."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        result = await service.vo_format_hard_coded()
+
+        assert "<DESCRIPTION>" in result
+        assert "NASA Neil Gehrels Swift Observatory Science Operations Center" in result
+        assert "Object Observability Simple Access Protocol (ObjObsSAP)" in result
+
+    @pytest.mark.asyncio
+    async def test_vo_format_hard_coded_info_fields(self):
+        """Test if vo_format_hard_coded includes correct INFO fields."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        result = await service.vo_format_hard_coded()
+
+        assert '<INFO name="QUERY_STATUS" value="OK"/>' in result
+        assert '<INFO name="SERVICE PROTOCOL" value="1.0">' in result
+        assert '<INFO name="POS" value="10.5,20.3"/>' in result
+        assert '<INFO name="TIME" value="60000.0/60001.0"/>' in result
+
+    @pytest.mark.asyncio
+    async def test_vo_format_hard_coded_table_structure(self):
+        """Test if vo_format_hard_coded includes correct table structure."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        result = await service.vo_format_hard_coded()
+
+        assert "<TABLE>" in result
+        assert '<FIELD name="t_start"' in result
+        assert '<FIELD name="t_stop"' in result
+        assert '<FIELD name="t_observability"' in result
+
+    @pytest.mark.asyncio
+    async def test_vo_format_hard_coded_empty_windows(self):
+        """Test if vo_format_hard_coded handles empty windows correctly."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, max_rec=0)
+        result = await service.vo_format_hard_coded()
+
+        assert "<DATA>" not in result
+        assert "<TABLEDATA>" not in result
+        assert "<TR>" not in result
+
+    @pytest.mark.asyncio
+    async def test_vo_format_hard_coded_with_windows(self):
+        """Test if vo_format_hard_coded formats windows correctly."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
+        service.windows = [(60000.0, 60001.0)]
+        result = await service.vo_format_hard_coded()
+
+        assert "<DATA>" in result
+        assert "<TABLEDATA>" in result
+        assert "<TR>" in result
+        assert "<TD>60000.00000</TD>" in result
+        assert "<TD>60001.00000</TD>" in result
+        assert "<TD>86400</TD>" in result

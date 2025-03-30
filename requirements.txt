@@ -72,6 +72,8 @@ idna==3.10
     #   email-validator
     #   httpx
     #   requests
+iniconfig==2.1.0
+    # via pytest
 ipykernel==6.29.5
     # via swift-vo (pyproject.toml)
 ipython==9.0.2
@@ -115,6 +117,7 @@ packaging==24.2
     #   astropy
     #   gunicorn
     #   ipykernel
+    #   pytest
 pandas==2.2.3
     # via swifttools
 parso==0.8.4
@@ -123,6 +126,8 @@ pexpect==4.9.0
     # via ipython
 platformdirs==4.3.7
     # via jupyter-core
+pluggy==1.5.0
+    # via pytest
 prompt-toolkit==3.0.50
     # via ipython
 psutil==7.0.0
@@ -146,6 +151,10 @@ pygments==2.19.1
     #   ipython
     #   ipython-pygments-lexers
     #   rich
+pytest==8.3.5
+    # via pytest-asyncio
+pytest-asyncio==0.26.0
+    # via swift-vo (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via
     #   botocore
