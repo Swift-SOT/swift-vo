@@ -2,7 +2,7 @@
 
 # Define variables
 VENV_DIR = .venv
-SYSTEM_PYTHON = $(shell command -v python3.12 || command -v python3.11 || command -v python)
+SYSTEM_PYTHON = $(shell command -v python3.12 || command -v python3.11 || command -v python || command -v python3)
 PYTHON = $(VENV_DIR)/bin/python
 PIP = $(VENV_DIR)/bin/pip
 UV = $(VENV_DIR)/bin/uv
@@ -42,6 +42,17 @@ ${UV}: setup
 # Set up the virtual environment and install depends
 setup: $(VENV_DIR)
 $(VENV_DIR):
+	@if ! command -v $(SYSTEM_PYTHON) > /dev/null 2>&1; then \
+		echo "Python command not found"; \
+		exit 1; \
+	elif ! $(SYSTEM_PYTHON) -c "import sys; sys.exit(0) if sys.version_info >= (3, 11) else sys.exit(1)" >/dev/null 2>&1; then \
+		echo "Python 3.11 or higher is required"; \
+		exit 1; \
+	else \
+		echo "Using Python version: $$( $(SYSTEM_PYTHON) --version)"; \
+	fi
+
+
 	@${SYSTEM_PYTHON} -m venv $(VENV_DIR)
 	@echo "Created virtual environment in $(VENV_DIR)"
 
@@ -83,7 +94,7 @@ dev: pip-install-dev
 	@${FASTAPI} dev app.py
 
 # Run the API in production mode
-prod: pip-install-dev
+prod: pip-sync-prod
 	@${UV} pip install setuptools wheel
 	@${FASTAPI} run app.py --workers=4
 
