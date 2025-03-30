@@ -1,4 +1,5 @@
 from astropy.time import Time  # type: ignore[import-untyped]
+from asyncer import asyncify
 from swifttools.swift_too import VisQuery  # type: ignore[import-untyped]
 
 
@@ -20,12 +21,14 @@ class ObjObsSAPService:
         self.upload = upload
         self.windows = []
 
-    def query(self):
+    async def query(self):
         """
         This method queries the ObjObsSAP service.
         """
         if self.max_rec != 0:
-            vis_windows = VisQuery(ra=self.s_ra, dec=self.s_dec, begin=self.t_min, end=self.t_max, hires=True)
+            vis_windows = await asyncify(VisQuery)(
+                ra=self.s_ra, dec=self.s_dec, begin=self.t_min, end=self.t_max, hires=True
+            )
             self.windows = [
                 (Time(e.begin).mjd, Time(e.end).mjd)
                 for e in vis_windows.entries
@@ -34,7 +37,7 @@ class ObjObsSAPService:
         if self.max_rec is not None:
             self.windows = self.windows[: self.max_rec]
 
-    def vo_format(self):
+    async def vo_format(self):
         """
         This method formats the query results into a VOTable.
         """

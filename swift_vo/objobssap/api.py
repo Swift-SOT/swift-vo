@@ -43,8 +43,8 @@ async def objvissap(
         max_rec=MAX_REC,
         upload=UPLOAD,
     )
-    vo.query()
-    xml_data = vo.vo_format()
+    await vo.query()
+    xml_data = await vo.vo_format()
 
     return Response(content=xml_data, media_type="application/xml")
 

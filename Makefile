@@ -85,7 +85,7 @@ dev: pip-install-dev
 # Run the API in production mode
 prod: pip-install-dev
 	@${UV} pip install setuptools wheel
-	@${FASTAPI} run app.py
+	@${FASTAPI} run app.py --workers=4
 
 # Clean up the virtual environment and other generated files
 clean:

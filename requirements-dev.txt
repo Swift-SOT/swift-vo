@@ -4,6 +4,7 @@ annotated-types==0.7.0
     # via pydantic
 anyio==4.9.0
     # via
+    #   asyncer
     #   httpx
     #   jupyter-server
     #   starlette
@@ -24,6 +25,8 @@ asttokens==3.0.0
     # via stack-data
 async-lru==2.0.5
     # via jupyterlab
+asyncer==0.0.8
+    # via swift-vo (pyproject.toml)
 attrs==25.3.0
     # via
     #   jsonschema
