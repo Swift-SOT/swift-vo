@@ -72,14 +72,12 @@ class ObjObsSAPService:
         resource.infos.append(service_protocol_info)
 
         resource.infos.append(Info(name="REQUEST", value="queryData"))
-        resource.infos.append(Info(name="s_ra", value=str(self.s_ra)))
-        resource.infos.append(Info(name="s_dec", value=str(self.s_dec)))
-        resource.infos.append(Info(name="t_min", value=str(self.t_min)))
-        resource.infos.append(Info(name="t_max", value=str(self.t_max)))
-        if self.min_obs is not None:
-            resource.infos.append(Info(name="min_obs", value=str(self.min_obs)))
+        resource.infos.append(Info(name="POS", value=f"{self.s_ra},{self.s_dec}"))
+        resource.infos.append(Info(name="TIME", value=f"{Time(self.t_min).mjd}/{Time(self.t_max).mjd}"))
+        if self.min_obs is not None and self.min_obs > 0:
+            resource.infos.append(Info(name="MIN_OBS", value=str(self.min_obs)))
         if self.max_rec is not None:
-            resource.infos.append(Info(name="max_rec", value=str(self.max_rec)))
+            resource.infos.append(Info(name="MAX_REC", value=str(self.max_rec)))
         if self.upload is not None:
             resource.infos.append(Info(name="UPLOAD", value=str(self.upload)))
 
