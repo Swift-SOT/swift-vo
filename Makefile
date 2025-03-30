@@ -94,7 +94,7 @@ dev: pip-install-dev
 	@${FASTAPI} dev app.py
 
 # Run the API in production mode
-prod: pip-install-dev
+prod: pip-sync-prod
 	@${UV} pip install setuptools wheel
 	@${FASTAPI} run app.py --workers=4
 
