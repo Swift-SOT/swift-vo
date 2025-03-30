@@ -1,3 +1,12 @@
+from io import BytesIO
+
+from astropy.io.votable.tree import (  # type: ignore[import-untyped]
+    Field,
+    Info,
+    Resource,
+    TableElement,
+    VOTableFile,
+)
 from astropy.time import Time  # type: ignore[import-untyped]
 from asyncer import asyncify
 from swifttools.swift_too import VisQuery  # type: ignore[import-untyped]
@@ -37,7 +46,91 @@ class ObjObsSAPService:
         if self.max_rec is not None:
             self.windows = self.windows[: self.max_rec]
 
-    async def vo_format(self):
+    async def vo_format(self) -> str:
+        """
+        This method formats the query results into a VOTable using astropy.
+        """
+
+        # Create a new VOTable file
+        votable = VOTableFile()
+
+        # Define resources
+        resource = Resource()
+        votable.resources.append(resource)
+        table = TableElement(votable)
+        resource.tables.append(table)
+
+        # Describe resources
+        resource.description = (
+            "NASA Neil Gehrels Swift Observatory Science Operations Center - "
+            + "Object Observability Simple Access Protocol (ObjObsSAP)"
+        )
+        resource.infos.append(Info(name="QUERY_STATUS", value="OK"))
+
+        service_protocol_info = Info(name="SERVICE PROTOCOL", value="1.0")
+        service_protocol_info.content = "ObjObsSAP"
+        resource.infos.append(service_protocol_info)
+
+        resource.infos.append(Info(name="REQUEST", value="queryData"))
+        resource.infos.append(Info(name="s_ra", value=str(self.s_ra)))
+        resource.infos.append(Info(name="s_dec", value=str(self.s_dec)))
+        resource.infos.append(Info(name="t_min", value=str(self.t_min)))
+        resource.infos.append(Info(name="t_max", value=str(self.t_max)))
+        if self.min_obs is not None:
+            resource.infos.append(Info(name="min_obs", value=str(self.min_obs)))
+        if self.max_rec is not None:
+            resource.infos.append(Info(name="max_rec", value=str(self.max_rec)))
+        if self.upload is not None:
+            resource.infos.append(Info(name="UPLOAD", value=str(self.upload)))
+
+        # Define the table
+        table.fields.extend(
+            [
+                Field(
+                    votable,
+                    name="t_start",
+                    datatype="double",
+                    ucd="time.start",
+                    utype="Char.TimeAxis.Coverage.Bounds.Limits.StartTime",
+                    unit="d",
+                ),
+                Field(
+                    votable,
+                    name="t_stop",
+                    datatype="double",
+                    ucd="time.end",
+                    utype="Char.TimeAxis.Coverage.Bounds.Limits.StopTime",
+                    unit="d",
+                ),
+                Field(
+                    votable,
+                    name="t_visibility",
+                    datatype="double",
+                    ucd="time.duration",
+                    utype="Char.TimeAxis.Coverage.Support.Extent",
+                    unit="s",
+                ),
+            ]
+        )
+
+        # Add windows to the table
+        n_windows = len(self.windows)
+        table.create_arrays(n_windows)
+        for i in range(0, n_windows):
+            table.array[i] = (
+                self.windows[i][0],
+                self.windows[i][1],
+                (self.windows[i][1] - self.windows[i][0]) * 86400,
+            )
+
+        # Create the VOTable XML as a string and return it
+        with BytesIO() as stream:
+            votable.to_xml(stream)
+            stream.seek(0)
+            xml_out = stream.read().decode()
+        return xml_out
+
+    async def vo_format_str(self) -> str:
         """
         This method formats the query results into a VOTable.
         """
