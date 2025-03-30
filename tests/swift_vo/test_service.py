@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import pytest  # type: ignore[import-untyped]
-from astropy.time import Time
+from astropy.time import Time  # type: ignore[import-untyped]
 
 from swift_vo.objobssap.service import ObjObsSAPService
 
