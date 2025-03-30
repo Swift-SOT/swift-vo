@@ -247,3 +247,11 @@ class TestObjObsSAPService:
         service.windows = [(60000.0, 60001.0)]
         result = await service.vo_format_hard_coded()
         assert "<TD>86400</TD>" in result
+
+    @pytest.mark.asyncio
+    async def test_upload_in_xml(self):
+        """Test if upload parameter is included in XML."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, upload="test.xml")
+        result = await service.vo_format()
+        print(result)
+        assert '<INFO ID="UPLOAD" name="UPLOAD" value="test.xml"/>' in result
