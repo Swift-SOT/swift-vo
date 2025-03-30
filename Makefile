@@ -42,7 +42,6 @@ ${UV}: setup
 # Set up the virtual environment and install depends
 setup: $(VENV_DIR)
 $(VENV_DIR):
-	echo ${SYSTEM_PYTHON};
 	@if ! command -v $(SYSTEM_PYTHON) > /dev/null 2>&1; then \
 		echo "Python command not found"; \
 		exit 1; \
@@ -50,7 +49,7 @@ $(VENV_DIR):
 		echo "Python 3.11 or higher is required"; \
 		exit 1; \
 	else \
-		echo "Using Python version: $$(python --version)"; \
+		echo "Using Python version: $$( $(SYSTEM_PYTHON) --version)"; \
 	fi
 
 
