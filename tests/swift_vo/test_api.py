@@ -56,7 +56,7 @@ def test_parse_min_obs_zero():
 def test_objvissap_endpoint_status():
     """Test the status of the ObjObsSAP endpoint."""
     response = client.get(
-        "/objobssap/query",
+        "/ObjObsSAP/query",
         params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAX_REC": "100"},
     )
     assert response.status_code == 200
@@ -65,7 +65,7 @@ def test_objvissap_endpoint_status():
 def test_objvissap_endpoint_content_type():
     """Test the content type of the ObjObsSAP endpoint response."""
     response = client.get(
-        "/objobssap/query",
+        "/ObjObsSAP/query",
         params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAX_REC": "100"},
     )
     assert response.headers["content-type"] == "application/xml"
@@ -74,7 +74,7 @@ def test_objvissap_endpoint_content_type():
 def test_objvissap_endpoint_content_length():
     """Test the content length of the ObjObsSAP endpoint response."""
     response = client.get(
-        "/objobssap/query",
+        "/ObjObsSAP/query",
         params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAX_REC": "100"},
     )
     assert len(response.content) > 0
@@ -83,7 +83,7 @@ def test_objvissap_endpoint_content_length():
 def test_objvissap_invalid_pos():
     """Test the response for an invalid position value."""
     response = client.get(
-        "/objobssap/query", params={"POS": "invalid", "TIME": "60000/60001", "MIN_OBS": "1.5"}
+        "/ObjObsSAP/query", params={"POS": "invalid", "TIME": "60000/60001", "MIN_OBS": "1.5"}
     )
     assert response.status_code == 422
 
@@ -91,6 +91,6 @@ def test_objvissap_invalid_pos():
 def test_objvissap_invalid_time():
     """Test the response for an invalid time value."""
     response = client.get(
-        "/objobssap/query", params={"POS": "10.5,20.3", "TIME": "invalid", "MIN_OBS": "1.5"}
+        "/ObjObsSAP/query", params={"POS": "10.5,20.3", "TIME": "invalid", "MIN_OBS": "1.5"}
     )
     assert response.status_code == 422

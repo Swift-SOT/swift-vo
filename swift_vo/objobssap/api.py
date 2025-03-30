@@ -5,7 +5,7 @@ from swift_vo.objobssap.service import ObjObsSAPService
 from ..base.api import app
 from .schema import VOPosition, VOTimeRange
 
-router = APIRouter(prefix="/objobssap", tags=["ObjObsSAP"])
+router = APIRouter(prefix="/ObjObsSAP", tags=["ObjObsSAP"])
 
 
 def parse_pos(POS: str = Query(..., description="Position in 'RA,DEC' format")) -> VOPosition:
