@@ -48,7 +48,13 @@ class ObjObsSAPService:
 
     async def vo_format(self) -> str:
         """
-        This method formats the query results into a VOTable using astropy.
+        This method formats the query results into a VOTable using astropy's
+        VOTable support.
+
+        Note that this output does match the example in the VO ObjObsSAP 1.0
+        documentation (https://www.ivoa.net/documents/ObjObsSAP/), as elements
+        have "ID=" attributes not present in the example. This is because the
+        VOTable library automatically generates these attributes.
         """
 
         # Create a new VOTable file
@@ -128,10 +134,12 @@ class ObjObsSAPService:
             xml_out = stream.read().decode()
         return xml_out
 
-    async def vo_format_str(self) -> str:
+    async def vo_format_hard_coded(self) -> str:
         """
-        This method formats the query results into a VOTable.
+        This method formats the query results into a VOTable, using a hardcoded
+        format based on the example in the VO ObjObsSAP documentation.
         """
+        # Create the VOTable XML as a string
         vo = f"""<?xml version="1.0" encoding="UTF-8"?>
 <VOTABLE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="
