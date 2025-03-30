@@ -1,22 +1,26 @@
 # swift-vo
 
 Swift VO implementation of ObjObsSAP. This is implemented as a microservice
-based upon the [FastAPI](http://fastapi.tiangolo.com) library. In order to run
+based upon the [FastAPI](http://fastapi.tiangolo.com) library. Visibility
+calculations are performed using the Python API for the [Swift TOO
+API](https://www.swift.psu.edu/too_api) contained in the `swifttools` module.
+
+In order to run
 locally in dev mode clone this repo:
 
-```sh
+```shell
 git clone git@github.com:Swift-SOT/swift-vo.git
 ```
 
 Enter the directory created:
 
-```sh
+```shell
 cd swift-vo
 ```
 
 install requirements and start the development server with the following command:
 
-```sh
+```shell
 make dev
 ```
 
