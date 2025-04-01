@@ -63,7 +63,7 @@ comm==0.2.2
     # via
     #   ipykernel
     #   ipywidgets
-coverage==7.7.1
+coverage==7.8.0
     # via pytest-cov
 debugpy==1.8.13
     # via ipykernel
