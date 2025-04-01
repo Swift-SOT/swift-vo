@@ -16,7 +16,7 @@ asyncer==0.0.8
     # via swift-vo (pyproject.toml)
 boto3==1.37.23
     # via swifttools
-botocore==1.37.23
+botocore==1.37.24
     # via
     #   boto3
     #   s3transfer
