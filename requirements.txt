@@ -14,7 +14,7 @@ astropy-iers-data==0.2025.3.24.0.35.32
     # via astropy
 asyncer==0.0.8
     # via swift-vo (pyproject.toml)
-boto3==1.37.23
+boto3==1.37.24
     # via swifttools
 botocore==1.37.23
     # via
