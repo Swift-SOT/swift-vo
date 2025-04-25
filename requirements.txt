@@ -44,7 +44,7 @@ fastapi-cli==0.0.7
     # via fastapi
 gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
-h11==0.14.0
+h11==0.16.0
     # via
     #   httpcore
     #   uvicorn
