@@ -37,7 +37,7 @@ beautifulsoup4==4.13.3
     # via nbconvert
 bleach==6.2.0
     # via nbconvert
-boto3==1.37.23
+boto3==1.38.2
     # via swifttools
 botocore==1.37.24
     # via
