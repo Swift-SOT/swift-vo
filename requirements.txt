@@ -46,9 +46,10 @@ gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
 h11==0.16.0
     # via
+    #   swift-vo (pyproject.toml)
     #   httpcore
     #   uvicorn
-httpcore==1.0.7
+httpcore==1.0.9
     # via httpx
 httptools==0.6.4
     # via uvicorn
