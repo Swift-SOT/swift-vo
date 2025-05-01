@@ -468,7 +468,7 @@ uvloop==0.21.0
     # via uvicorn
 virtualenv==20.30.0
     # via pre-commit
-watchfiles==1.0.4
+watchfiles==1.0.5
     # via uvicorn
 wcwidth==0.2.13
     # via prompt-toolkit
