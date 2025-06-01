@@ -41,21 +41,21 @@ repos:
         description: Verify that pyproject.toml adheres to the established schema.
     # Verify that GitHub workflows are well formed
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.32.1
+    rev: 0.33.0
     hooks:
       - id: check-github-workflows
         args: ["--verbose"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: v0.11.2
+    rev: v0.11.12
     hooks:
-      - id: ruff
+      - id: ruff-check
         name: Lint code using ruff; sort and organize imports 
         types_or: [ python, pyi ]
         args: ["--fix"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: v0.11.2
+    rev: v0.11.12
     hooks:
       - id: ruff-format
         name: Format code using ruff
