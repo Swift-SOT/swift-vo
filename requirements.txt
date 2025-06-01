@@ -8,7 +8,7 @@ anyio==4.9.0
     #   httpx
     #   starlette
     #   watchfiles
-astropy==7.0.1
+astropy==7.0.2
     # via swift-vo (pyproject.toml)
 astropy-iers-data==0.2025.3.31.0.36.18
     # via astropy
