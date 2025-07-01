@@ -433,7 +433,7 @@ traitlets==5.14.3
     #   nbclient
     #   nbconvert
     #   nbformat
-typer==0.15.2
+typer==0.16.0
     # via fastapi-cli
 types-python-dateutil==2.9.0.20241206
     # via arrow
