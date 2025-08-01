@@ -397,7 +397,7 @@ soupsieve==2.7
     # via beautifulsoup4
 stack-data==0.6.3
     # via ipython
-starlette==0.46.1
+starlette==0.47.2
     # via fastapi
 swifttools==3.0.23
     # via swift-vo (pyproject.toml)
