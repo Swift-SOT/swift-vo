@@ -38,7 +38,7 @@ ecdsa==0.19.1
     # via python-jose
 email-validator==2.2.0
     # via fastapi
-fastapi==0.115.12
+fastapi==0.116.1
     # via swift-vo (pyproject.toml)
 fastapi-cli==0.0.7
     # via fastapi
