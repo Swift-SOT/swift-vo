@@ -81,7 +81,7 @@ email-validator==2.2.0
     # via fastapi
 executing==2.2.0
     # via stack-data
-fastapi==0.115.12
+fastapi==0.116.1
     # via swift-vo (pyproject.toml)
 fastapi-cli==0.0.7
     # via fastapi
