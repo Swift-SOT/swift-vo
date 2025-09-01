@@ -39,7 +39,7 @@ bleach==6.2.0
     # via nbconvert
 boto3==1.40.21
     # via swifttools
-botocore==1.38.27
+botocore==1.40.21
     # via
     #   boto3
     #   s3transfer
@@ -48,6 +48,7 @@ certifi==2025.4.26
     #   httpcore
     #   httpx
     #   requests
+    #   sentry-sdk
 cffi==1.17.1
     # via argon2-cffi-bindings
 cfgv==3.4.0
@@ -78,12 +79,14 @@ dnspython==2.7.0
 ecdsa==0.19.1
     # via python-jose
 email-validator==2.2.0
-    # via fastapi
+    # via
+    #   fastapi
+    #   pydantic
 executing==2.2.0
     # via stack-data
 fastapi==0.116.1
     # via swift-vo (pyproject.toml)
-fastapi-cli==0.0.7
+fastapi-cli==0.0.10
     # via fastapi
 fastjsonschema==2.21.2
     # via nbformat
@@ -105,6 +108,7 @@ httptools==0.6.4
 httpx==0.28.1
     # via
     #   fastapi
+    #   fastapi-cloud-cli
     #   jupyterlab
 identify==2.6.9
     # via pre-commit
@@ -191,7 +195,7 @@ jupyter-server==2.15.0
     #   notebook-shim
 jupyter-server-terminals==0.5.3
     # via jupyter-server
-jupyterlab==4.3.6
+jupyterlab==4.4.6
     # via
     #   jupyter
     #   notebook
@@ -267,6 +271,8 @@ pandocfilters==1.5.1
     # via nbconvert
 parso==0.8.4
     # via jedi
+pathspec==0.12.1
+    # via mypy
 pexpect==4.9.0
     # via ipython
 platformdirs==4.3.7
@@ -298,7 +304,9 @@ pyasn1==0.4.8
 pycparser==2.22
     # via cffi
 pydantic==2.11.1
-    # via fastapi
+    # via
+    #   fastapi
+    #   fastapi-cloud-cli
 pydantic-core==2.33.0
     # via pydantic
 pyerfa==2.0.1.5
@@ -378,10 +386,12 @@ rsa==4.9
     # via python-jose
 ruff==0.11.2
     # via swift-vo (pyproject.toml)
-s3transfer==0.12.0
+s3transfer==0.13.1
     # via boto3
 send2trash==1.8.3
     # via jupyter-server
+sentry-sdk==2.35.2
+    # via fastapi-cloud-cli
 setuptools==78.1.1
     # via jupyterlab
 shellingham==1.5.4
@@ -434,7 +444,9 @@ traitlets==5.14.3
     #   nbconvert
     #   nbformat
 typer==0.16.0
-    # via fastapi-cli
+    # via
+    #   fastapi-cli
+    #   fastapi-cloud-cli
 types-python-dateutil==2.9.0.20241206
     # via arrow
 typing-extensions==4.13.0
@@ -447,6 +459,7 @@ typing-extensions==4.13.0
     #   pydantic-core
     #   referencing
     #   rich-toolkit
+    #   starlette
     #   typer
     #   typing-inspection
 typing-inspection==0.4.0
@@ -459,11 +472,13 @@ urllib3==2.5.0
     # via
     #   botocore
     #   requests
+    #   sentry-sdk
 uvicorn==0.34.0
     # via
     #   swift-vo (pyproject.toml)
     #   fastapi
     #   fastapi-cli
+    #   fastapi-cloud-cli
 uvloop==0.21.0
     # via uvicorn
 virtualenv==20.30.0
