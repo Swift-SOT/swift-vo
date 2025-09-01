@@ -25,7 +25,6 @@ certifi==2025.4.26
     #   httpcore
     #   httpx
     #   requests
-    #   sentry-sdk
 charset-normalizer==3.4.2
     # via requests
 click==8.1.8
@@ -38,15 +37,11 @@ dnspython==2.7.0
 ecdsa==0.19.1
     # via python-jose
 email-validator==2.2.0
-    # via
-    #   fastapi
-    #   pydantic
+    # via fastapi
 fastapi==0.116.1
     # via swift-vo (pyproject.toml)
 fastapi-cli==0.0.10
     # via fastapi
-fastapi-cloud-cli==0.1.5
-    # via fastapi-cli
 gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
 h11==0.16.0
@@ -59,9 +54,7 @@ httpcore==1.0.9
 httptools==0.6.4
     # via uvicorn
 httpx==0.28.1
-    # via
-    #   fastapi
-    #   fastapi-cloud-cli
+    # via fastapi
 idna==3.10
     # via
     #   anyio
@@ -102,9 +95,7 @@ pyasn1==0.4.8
     #   python-jose
     #   rsa
 pydantic==2.11.1
-    # via
-    #   fastapi
-    #   fastapi-cloud-cli
+    # via fastapi
 pydantic-core==2.33.0
     # via pydantic
 pyerfa==2.0.1.5
@@ -143,8 +134,6 @@ rsa==4.9
     # via python-jose
 s3transfer==0.13.1
     # via boto3
-sentry-sdk==2.35.2
-    # via fastapi-cloud-cli
 shellingham==1.5.4
     # via typer
 six==1.17.0
@@ -160,9 +149,7 @@ swifttools==3.0.23
 tabulate==0.9.0
     # via swifttools
 typer==0.16.0
-    # via
-    #   fastapi-cli
-    #   fastapi-cloud-cli
+    # via fastapi-cli
 typing-extensions==4.13.0
     # via
     #   anyio
@@ -181,13 +168,11 @@ urllib3==2.5.0
     # via
     #   botocore
     #   requests
-    #   sentry-sdk
 uvicorn==0.34.0
     # via
     #   swift-vo (pyproject.toml)
     #   fastapi
     #   fastapi-cli
-    #   fastapi-cloud-cli
 uvloop==0.21.0
     # via uvicorn
 watchfiles==1.0.5
