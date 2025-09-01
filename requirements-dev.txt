@@ -85,7 +85,7 @@ fastapi==0.116.1
     # via swift-vo (pyproject.toml)
 fastapi-cli==0.0.7
     # via fastapi
-fastjsonschema==2.21.1
+fastjsonschema==2.21.2
     # via nbformat
 filelock==3.18.0
     # via virtualenv
