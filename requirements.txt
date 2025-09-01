@@ -14,9 +14,9 @@ astropy-iers-data==0.2025.5.26.0.37.21
     # via astropy
 asyncer==0.0.8
     # via swift-vo (pyproject.toml)
-boto3==1.38.2
+boto3==1.40.21
     # via swifttools
-botocore==1.38.27
+botocore==1.40.21
     # via
     #   boto3
     #   s3transfer
@@ -40,7 +40,7 @@ email-validator==2.2.0
     # via fastapi
 fastapi==0.116.1
     # via swift-vo (pyproject.toml)
-fastapi-cli==0.0.7
+fastapi-cli==0.0.10
     # via fastapi
 gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
@@ -132,7 +132,7 @@ rich-toolkit==0.15.0
     # via fastapi-cli
 rsa==4.9
     # via python-jose
-s3transfer==0.12.0
+s3transfer==0.13.1
     # via boto3
 shellingham==1.5.4
     # via typer
@@ -157,6 +157,7 @@ typing-extensions==4.13.0
     #   pydantic
     #   pydantic-core
     #   rich-toolkit
+    #   starlette
     #   typer
     #   typing-inspection
 typing-inspection==0.4.0

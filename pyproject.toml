@@ -16,7 +16,7 @@ requires-python = ">=3.11"
 dependencies = [
     "astropy",
     "swifttools",
-    "fastapi[standard]",
+    "fastapi[standard-no-fastapi-cloud-cli]",
     "gunicorn>=23.0.0",
     "uvicorn>=0.34.0",
     "asyncer>=0.0.8",
