@@ -34,10 +34,10 @@ class TestObjObsSAPService:
         service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
         assert service.min_obs == 1500
 
-    def test_max_rec_default_initialization(self):
-        """Test the default initialization of max_rec parameter."""
+    def test_maxrec_default_initialization(self):
+        """Test the default initialization of maxrec parameter."""
         service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
-        assert service.max_rec is None
+        assert service.maxrec is None
 
     def test_upload_default_initialization(self):
         """Test the default initialization of upload parameter."""
@@ -49,10 +49,10 @@ class TestObjObsSAPService:
         service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500)
         assert service.windows == []
 
-    def test_max_rec_optional_initialization(self):
-        """Test the optional initialization of max_rec parameter."""
-        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, max_rec=100)
-        assert service.max_rec == 100
+    def test_maxrec_optional_initialization(self):
+        """Test the optional initialization of maxrec parameter."""
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, maxrec=100)
+        assert service.maxrec == 100
 
     def test_upload_optional_initialization(self):
         """Test the optional initialization of upload parameter."""
@@ -182,21 +182,21 @@ class TestObjObsSAPService:
     @pytest.mark.asyncio
     async def test_vo_format_hard_coded_no_data_empty_windows(self):
         """Test if vo_format_hard_coded has no DATA tag with empty windows."""
-        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, max_rec=0)
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, maxrec=0)
         result = await service.vo_format_hard_coded()
         assert "<DATA>" not in result
 
     @pytest.mark.asyncio
     async def test_vo_format_hard_coded_no_tabledata_empty_windows(self):
         """Test if vo_format_hard_coded has no TABLEDATA tag with empty windows."""
-        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, max_rec=0)
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, maxrec=0)
         result = await service.vo_format_hard_coded()
         assert "<TABLEDATA>" not in result
 
     @pytest.mark.asyncio
     async def test_vo_format_hard_coded_no_tr_empty_windows(self):
         """Test if vo_format_hard_coded has no TR tag with empty windows."""
-        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, max_rec=0)
+        service = ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, maxrec=0)
         result = await service.vo_format_hard_coded()
         assert "<TR>" not in result
 

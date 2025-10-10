@@ -17,7 +17,7 @@ class ObjObsSAPService:
     This class is the service class for the ObjObsSAP service.
     """
 
-    def __init__(self, s_ra, s_dec, t_min, t_max, min_obs, max_rec=None, upload=None):
+    def __init__(self, s_ra, s_dec, t_min, t_max, min_obs, maxrec=None, upload=None):
         """
         This method initializes the service class.
         """
@@ -26,7 +26,7 @@ class ObjObsSAPService:
         self.t_min = Time(t_min, format="mjd").datetime
         self.t_max = Time(t_max, format="mjd").datetime
         self.min_obs = min_obs
-        self.max_rec = max_rec
+        self.maxrec = maxrec
         self.upload = upload
         self.windows = []
 
@@ -34,7 +34,7 @@ class ObjObsSAPService:
         """
         This method queries the ObjObsSAP service.
         """
-        if self.max_rec != 0:
+        if self.maxrec != 0:
             vis_windows = await asyncify(VisQuery)(
                 ra=self.s_ra, dec=self.s_dec, begin=self.t_min, end=self.t_max, hires=True
             )
@@ -43,8 +43,8 @@ class ObjObsSAPService:
                 for e in vis_windows.entries
                 if e.length.total_seconds() >= self.min_obs
             ]
-        if self.max_rec is not None:
-            self.windows = self.windows[: self.max_rec]
+        if self.maxrec is not None:
+            self.windows = self.windows[: self.maxrec]
 
     async def vo_format(self) -> str:
         """
@@ -82,8 +82,8 @@ class ObjObsSAPService:
         resource.infos.append(Info(name="TIME", value=f"{Time(self.t_min).mjd}/{Time(self.t_max).mjd}"))
         if self.min_obs is not None and self.min_obs > 0:
             resource.infos.append(Info(name="MIN_OBS", value=str(self.min_obs)))
-        if self.max_rec is not None:
-            resource.infos.append(Info(name="MAX_REC", value=str(self.max_rec)))
+        if self.maxrec is not None:
+            resource.infos.append(Info(name="MAXREC", value=str(self.maxrec)))
         if self.upload is not None:
             resource.infos.append(Info(name="UPLOAD", value=str(self.upload)))
 
@@ -167,7 +167,7 @@ datatype="float" unit="d"/>
 <FIELD name="t_observability"
 utype="Char.TimeAxis.Coverage.Support.Extent"
 ucd="time.duration" datatype="float" unit="s"/>\n"""
-        if self.max_rec != 0:
+        if self.maxrec != 0:
             vo += "<DATA>\n"
             vo += "<TABLEDATA>\n"
 
