@@ -53,7 +53,7 @@ async def objvissap(
         t_min=time.t_min,
         t_max=time.t_max,
         min_obs=min_obs,
-        max_rec=MAXREC,
+        maxrec=MAXREC,
         upload=UPLOAD,
     )
     await vo.query()
