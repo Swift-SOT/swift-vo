@@ -41,7 +41,7 @@ async def objvissap(
     position: VOPosition = Depends(parse_pos),
     time: VOTimeRange = Depends(parse_time),
     min_obs: float = Depends(parse_min_obs),
-    MAX_REC: int | None = Query(default=None, description="Maximum number of records to return"),
+    MAXREC: int | None = Query(default=None, description="Maximum number of records to return"),
     UPLOAD: str | None = Query(
         default=None, description="Not used for ObjObsSAP, but included for consistency"
     ),
@@ -53,7 +53,7 @@ async def objvissap(
         t_min=time.t_min,
         t_max=time.t_max,
         min_obs=min_obs,
-        max_rec=MAX_REC,
+        max_rec=MAXREC,
         upload=UPLOAD,
     )
     await vo.query()
