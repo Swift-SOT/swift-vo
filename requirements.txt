@@ -40,7 +40,7 @@ email-validator==2.2.0
     # via fastapi
 fastapi==0.116.1
     # via swift-vo (pyproject.toml)
-fastapi-cli==0.0.10
+fastapi-cli==0.0.13
     # via fastapi
 gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
