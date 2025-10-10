@@ -18,7 +18,8 @@ def parse_time(
 ) -> VOTimeRange:
     """Parses the time string into a VOTimeRange object."""
     if TIME is None:
-        TIME = f"{Time.now().mjd}/{Time.now().mjd + 7}"
+        now = Time.now().mjd
+        TIME = f"{now}/{now + 7}"
     return VOTimeRange.from_string(TIME)
 
 
