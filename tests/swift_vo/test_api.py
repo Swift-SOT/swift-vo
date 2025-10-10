@@ -57,7 +57,7 @@ def test_objvissap_endpoint_status():
     """Test the status of the ObjObsSAP endpoint."""
     response = client.get(
         "/ObjObsSAP/query",
-        params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAX_REC": "100"},
+        params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAXREC": "100"},
     )
     assert response.status_code == 200
 
@@ -66,7 +66,7 @@ def test_objvissap_endpoint_content_type():
     """Test the content type of the ObjObsSAP endpoint response."""
     response = client.get(
         "/ObjObsSAP/query",
-        params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAX_REC": "100"},
+        params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAXREC": "100"},
     )
     assert response.headers["content-type"] == "application/xml"
 
@@ -75,7 +75,7 @@ def test_objvissap_endpoint_content_length():
     """Test the content length of the ObjObsSAP endpoint response."""
     response = client.get(
         "/ObjObsSAP/query",
-        params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAX_REC": "100"},
+        params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAXREC": "100"},
     )
     assert len(response.content) > 0
 
