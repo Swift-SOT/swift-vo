@@ -1,9 +1,9 @@
+from astropy.time import Time  # type: ignore[import-untyped]
 from fastapi import APIRouter, Depends, Query, Response
-
-from swift_vo.objobssap.service import ObjObsSAPService
 
 from ..base.api import app
 from .schema import VOPosition, VOTimeRange
+from .service import ObjObsSAPService
 
 router = APIRouter(prefix="/objobssap", tags=["ObjObsSAP"])
 
@@ -13,8 +13,12 @@ def parse_pos(POS: str = Query(..., description="Position in 'RA,DEC' format")) 
     return VOPosition.from_string(POS)
 
 
-def parse_time(TIME: str = Query(..., description="Time range in 'T_MIN/T_MAX' format")) -> VOTimeRange:
+def parse_time(
+    TIME: str | None = Query(default=None, description="Time range in 'T_MIN/T_MAX' format"),
+) -> VOTimeRange:
     """Parses the time string into a VOTimeRange object."""
+    if TIME is None:
+        TIME = f"{Time.now().mjd}/{Time.now().mjd + 7}"
     return VOTimeRange.from_string(TIME)
 
 
