@@ -41,7 +41,7 @@ repos:
         description: Verify that pyproject.toml adheres to the established schema.
     # Verify that GitHub workflows are well formed
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.34.0
+    rev: 0.34.1
     hooks:
       - id: check-github-workflows
         args: ["--verbose"]

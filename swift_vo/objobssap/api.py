@@ -16,7 +16,10 @@ def parse_pos(POS: str = Query(..., description="Position in 'RA,DEC' format")) 
 def parse_time(
     TIME: str | None = Query(
         default=None,
-        description="Time range in 'T_MIN/T_MAX' format. Defaults to current date through 7 days from now if not provided.",
+        description=(
+            "Time range in 'T_MIN/T_MAX' format. Defaults to current date through"
+            " 7 days from now if not provided."
+        ),
     ),
 ) -> VOTimeRange:
     """Parses the time string into a VOTimeRange object."""
