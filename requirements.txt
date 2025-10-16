@@ -61,8 +61,6 @@ idna==3.10
     #   email-validator
     #   httpx
     #   requests
-iniconfig==2.1.0
-    # via pytest
 jinja2==3.1.6
     # via fastapi
 jmespath==1.0.1
@@ -85,11 +83,8 @@ packaging==25.0
     # via
     #   astropy
     #   gunicorn
-    #   pytest
 pandas==2.2.3
     # via swifttools
-pluggy==1.5.0
-    # via pytest
 pyasn1==0.4.8
     # via
     #   python-jose
@@ -102,10 +97,6 @@ pyerfa==2.0.1.5
     # via astropy
 pygments==2.19.1
     # via rich
-pytest==8.3.5
-    # via pytest-asyncio
-pytest-asyncio==0.26.0
-    # via swift-vo (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via
     #   botocore
@@ -152,12 +143,10 @@ typer==0.16.0
     # via fastapi-cli
 typing-extensions==4.13.0
     # via
-    #   anyio
     #   fastapi
     #   pydantic
     #   pydantic-core
     #   rich-toolkit
-    #   starlette
     #   typer
     #   typing-inspection
 typing-inspection==0.4.0
