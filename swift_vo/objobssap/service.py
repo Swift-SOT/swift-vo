@@ -1,3 +1,4 @@
+from datetime import UTC, datetime
 from io import BytesIO
 
 from astropy.io.votable.tree import (  # type: ignore[import-untyped]
@@ -46,7 +47,7 @@ class ObjObsSAPService:
         if self.maxrec is not None:
             self.windows = self.windows[: self.maxrec]
 
-    async def vo_format(self) -> str:
+    async def vo_format(self, query_url: str = "") -> str:
         """
         This method formats the query results into a VOTable using astropy's
         VOTable support.
@@ -56,6 +57,10 @@ class ObjObsSAPService:
         have "ID=" attributes not present in the example. This is because the
         VOTable library automatically generates these attributes.
         """
+
+        # Get the current date/time in UTC for the REQUEST_DATE info
+        now_utc: datetime = datetime.now(tz=UTC)
+        request_date_string: str = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # Create a new VOTable file
         votable = VOTableFile()
@@ -71,13 +76,16 @@ class ObjObsSAPService:
             "NASA Neil Gehrels Swift Observatory Science Operations Center - "
             + "Object Observability Simple Access Protocol (ObjObsSAP)"
         )
-        resource.infos.append(Info(name="QUERY_STATUS", value="OK"))
+        resource.infos.append(Info(name="query_status", value="OK"))
 
-        service_protocol_info = Info(name="SERVICE PROTOCOL", value="1.0")
-        service_protocol_info.content = "ObjObsSAP"
+        service_protocol_info = Info(name="SERVICE_PROTOCOL", value="ivo://ivoa.net/std/ObjObsSAP")
         resource.infos.append(service_protocol_info)
 
-        resource.infos.append(Info(name="REQUEST", value="queryData"))
+        resource.infos.append(Info(name="REQUEST", value=query_url))
+        resource.infos.append(
+            Info(name="REQUEST_DATE", value=request_date_string, content="Query execution date")
+        )
+
         resource.infos.append(Info(name="POS", value=f"{self.s_ra},{self.s_dec}"))
         resource.infos.append(Info(name="TIME", value=f"{Time(self.t_min).mjd}/{Time(self.t_max).mjd}"))
         if self.min_obs is not None and self.min_obs > 0:
@@ -133,55 +141,3 @@ class ObjObsSAPService:
             stream.seek(0)
             xml_out = stream.read().decode()
         return xml_out
-
-    async def vo_format_hard_coded(self) -> str:
-        """
-        This method formats the query results into a VOTable, using a hardcoded
-        format based on the example in the VO ObjObsSAP documentation.
-        """
-        # Create the VOTable XML as a string
-        vo = f"""<?xml version="1.0" encoding="UTF-8"?>
-<VOTABLE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="
-xmlns:http://www.ivoa.net/xml/VOTable/VOTable-1.1.xsd"
-xmlns:ssldm="http://www.ivoa.net/xml/ObjectObservabilityDM/ObjectObservabilityDM-v1.0.xsd"
-version="1.0">
-<RESOURCE type="results">
-<DESCRIPTION>
-NASA Neil Gehrels Swift Observatory Science Operations Center -
-Object Observability Simple Access Protocol (ObjObsSAP)
-</DESCRIPTION>
-<INFO name="QUERY_STATUS" value="OK"/>
-<INFO name="SERVICE PROTOCOL" value="1.0">
-ObjObsSAP
-</INFO>
-<INFO name="POS" value="{self.s_ra},{self.s_dec}"/>
-<INFO name="TIME" value="{Time(self.t_min).mjd}/{Time(self.t_max).mjd}"/>
-<TABLE>
-<FIELD name="t_start" ucd="time.start"
-utype="Char.TimeAxis.Coverage.Bounds.Limits.StartTime"
-datatype="float" unit="d"/>
-<FIELD name="t_stop" ucd="time.end"
-utype="Char.TimeAxis.Coverage.Bounds.Limits.StopTime"
-datatype="float" unit="d"/>
-<FIELD name="t_observability"
-utype="Char.TimeAxis.Coverage.Support.Extent"
-ucd="time.duration" datatype="float" unit="s"/>\n"""
-        if self.maxrec != 0:
-            vo += "<DATA>\n"
-            vo += "<TABLEDATA>\n"
-
-            for window in self.windows:
-                vo += "<TR>\n"
-                vo += f"<TD>{window[0]:.5f}</TD>\n"
-                vo += f"<TD>{window[1]:.5f}</TD>\n"
-                vo += f"<TD>{(window[1] - window[0]) * 86400:.0f}</TD>\n"
-                vo += "</TR>\n"
-
-            vo += "</TABLEDATA>\n"
-            vo += "</DATA>\n"
-        vo += "</TABLE>\n"
-        vo += "</RESOURCE>\n"
-        vo += "</VOTABLE>\n"
-
-        return vo
