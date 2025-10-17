@@ -17,11 +17,10 @@ class TestMjdnow:
 class TestVOTimeRange:
     """Tests for the VOTimeRange class."""
 
-    def test_votime_range_creation(self):
+    def test_votime_range_creation(self, valid_time_range):
         """Test creating VOTimeRange with valid values."""
-        time_range = VOTimeRange(t_min=50000.0, t_max=60000.0)
-        assert time_range.t_min == 50000.0
-        assert time_range.t_max == 60000.0
+        assert valid_time_range.t_min == 50000.0
+        assert valid_time_range.t_max == 60000.0
 
     def test_votime_range_from_string_valid(self):
         """Test parsing valid time range string."""
@@ -38,11 +37,10 @@ class TestVOTimeRange:
 class TestVOPosition:
     """Tests for the VOPosition class."""
 
-    def test_voposition_creation(self):
+    def test_voposition_creation(self, valid_position):
         """Test creating VOPosition with valid values."""
-        position = VOPosition(s_ra=10.5, s_dec=20.3)
-        assert position.s_ra == 10.5
-        assert position.s_dec == 20.3
+        assert valid_position.s_ra == 10.5
+        assert valid_position.s_dec == 20.3
 
     def test_voposition_from_string_valid(self):
         """Test parsing valid position string."""
@@ -59,11 +57,9 @@ class TestVOPosition:
 class TestObjObsSAPQueryParameters:
     """Tests for the ObjObsSAPQueryParameters class."""
 
-    def test_query_parameters(self):
+    def test_query_parameters(self, valid_position, valid_time_range):
         """Test creating query parameters."""
-        position = VOPosition(s_ra=10.5, s_dec=20.3)
-        time_range = VOTimeRange(t_min=50000.0, t_max=60000.0)
-        params = ObjObsSAPQueryParameters(pos=position, time=time_range, min_obs=1500.0)
-        assert params.pos == position
-        assert params.time == time_range
+        params = ObjObsSAPQueryParameters(pos=valid_position, time=valid_time_range, min_obs=1500.0)
+        assert params.pos == valid_position
+        assert params.time == valid_time_range
         assert params.min_obs == 1500.0

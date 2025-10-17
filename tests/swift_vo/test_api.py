@@ -10,14 +10,14 @@ client = TestClient(app)
 class TestParsePos:
     """Tests for the parse_pos function."""
 
-    def test_valid_ra(self):
+    def test_valid_ra(self, valid_pos):
         """Test the parsing of a valid RA value."""
-        pos = parse_pos("10.5,20.3")
+        pos = parse_pos(valid_pos)
         assert pos.s_ra == 10.5
 
-    def test_valid_dec(self):
+    def test_valid_dec(self, valid_pos):
         """Test the parsing of a valid DEC value."""
-        pos = parse_pos("10.5,20.3")
+        pos = parse_pos(valid_pos)
         assert pos.s_dec == 20.3
 
     def test_invalid(self):
@@ -29,14 +29,14 @@ class TestParsePos:
 class TestParseTime:
     """Tests for the parse_time function."""
 
-    def test_valid_min(self):
+    def test_valid_min(self, valid_time):
         """Test the parsing of a valid minimum time value."""
-        time = parse_time("60000/60001")
+        time = parse_time(valid_time)
         assert time.t_min == 60000.0
 
-    def test_valid_max(self):
+    def test_valid_max(self, valid_time):
         """Test the parsing of a valid maximum time value."""
-        time = parse_time("60000/60001")
+        time = parse_time(valid_time)
         assert time.t_max == 60001.0
 
     def test_invalid(self):
@@ -60,45 +60,38 @@ class TestParseMinObs:
 class TestObjObsSAP:
     """Tests for the ObjObsSAP endpoint."""
 
-    def test_endpoint_status(self):
+    def test_endpoint_status(self, query_params):
         """Test the status of the ObjObsSAP endpoint."""
-        response = client.get(
-            "/ObjObsSAP/query",
-            params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAXREC": "100"},
-        )
+        response = client.get("/ObjObsSAP/query", params=query_params)
         assert response.status_code == 200
 
-    def test_endpoint_content_type(self):
+    def test_endpoint_content_type(self, query_params):
         """Test the content type of the ObjObsSAP endpoint response."""
-        response = client.get(
-            "/ObjObsSAP/query",
-            params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAXREC": "100"},
-        )
+        response = client.get("/ObjObsSAP/query", params=query_params)
         assert response.headers["content-type"] == "application/x-votable+xml"
 
-    def test_endpoint_content_length(self):
+    def test_endpoint_content_length(self, query_params):
         """Test the content length of the ObjObsSAP endpoint response."""
-        response = client.get(
-            "/ObjObsSAP/query",
-            params={"POS": "10.5,20.3", "TIME": "60000/60001", "MIN_OBS": "1500", "MAXREC": "100"},
-        )
+        response = client.get("/ObjObsSAP/query", params=query_params)
         assert len(response.content) > 0
 
-    def test_invalid_pos(self):
+    def test_invalid_pos(self, valid_time, valid_min_obs):
         """Test the response for an invalid position value."""
         response = client.get(
-            "/ObjObsSAP/query", params={"POS": "invalid", "TIME": "60000/60001", "MIN_OBS": "1.5"}
+            "/ObjObsSAP/query",
+            params={"POS": "invalid", "TIME": valid_time, "MIN_OBS": valid_min_obs},
         )
         assert response.status_code == 422
 
-    def test_invalid_time(self):
+    def test_invalid_time(self, valid_pos, valid_min_obs):
         """Test the response for an invalid time value."""
         response = client.get(
-            "/ObjObsSAP/query", params={"POS": "10.5,20.3", "TIME": "invalid", "MIN_OBS": "1.5"}
+            "/ObjObsSAP/query",
+            params={"POS": valid_pos, "TIME": "invalid", "MIN_OBS": valid_min_obs},
         )
         assert response.status_code == 422
 
-    def test_default_time(self):
+    def test_default_time(self, valid_pos, valid_min_obs):
         """Test the that endpoint doesn't require TIME."""
-        response = client.get("/ObjObsSAP/query", params={"POS": "10.5,20.3", "MIN_OBS": "1.5"})
+        response = client.get("/ObjObsSAP/query", params={"POS": valid_pos, "MIN_OBS": valid_min_obs})
         assert response.status_code == 200
