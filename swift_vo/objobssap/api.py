@@ -40,11 +40,11 @@ def parse_min_obs(MIN_OBS: float = Query(default=0, description="Minimum observa
     responses={
         200: {
             "content": {
-                "application/xml": {
+                "application/x-votable+xml": {
                     "example": "<note><to>User</to><from>Server</from><message>Hello, XML!</message></note>"
                 }
             },
-            "description": "Returns an XML response",
+            "description": "Returns a VOTable response",
         }
     },
 )
@@ -70,7 +70,7 @@ async def objvissap(
     await vo.query()
     xml_data = await vo.vo_format()
 
-    return Response(content=xml_data, media_type="application/xml")
+    return Response(content=xml_data, media_type="application/x-votable+xml")
 
 
 app.include_router(router)
