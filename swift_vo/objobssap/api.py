@@ -1,5 +1,5 @@
 from astropy.time import Time  # type: ignore[import-untyped]
-from fastapi import APIRouter, Depends, Query, Response
+from fastapi import APIRouter, Depends, Query, Request, Response
 
 from ..base.api import app
 from .schema import VOPosition, VOTimeRange
@@ -49,6 +49,7 @@ def parse_min_obs(MIN_OBS: float = Query(default=0, description="Minimum observa
     },
 )
 async def objvissap(
+    request: Request,
     position: VOPosition = Depends(parse_pos),
     time: VOTimeRange = Depends(parse_time),
     min_obs: float = Depends(parse_min_obs),
@@ -68,7 +69,7 @@ async def objvissap(
         upload=UPLOAD,
     )
     await vo.query()
-    xml_data = await vo.vo_format()
+    xml_data = await vo.vo_format(query_url=str(request.url))
 
     return Response(content=xml_data, media_type="application/x-votable+xml")
 
