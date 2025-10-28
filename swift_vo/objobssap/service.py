@@ -123,6 +123,20 @@ class ObjObsSAPService:
                     utype="Char.TimeAxis.Coverage.Support.Extent",
                     unit="s",
                 ),
+                Field(
+                    votable,
+                    name="t_observability",
+                    datatype="double",
+                    ucd="time.duration",
+                    unit="d",
+                ),
+                Field(
+                    votable,
+                    name="t_validity",
+                    datatype="double",
+                    ucd="time.duration",
+                    unit="d",
+                ),
             ]
         )
 
@@ -130,10 +144,16 @@ class ObjObsSAPService:
         n_windows = len(self.windows)
         table.create_arrays(n_windows)
         for i in range(0, n_windows):
+            t_start = self.windows[i][0]
+            t_stop = self.windows[i][1]
+            t_observability = t_stop - t_start  # Duration in days
+            t_validity = Time(self.t_max).mjd - Time.now().mjd  # Days from now until end of query range
             table.array[i] = (
-                self.windows[i][0],
-                self.windows[i][1],
-                (self.windows[i][1] - self.windows[i][0]) * 86400,
+                t_start,
+                t_stop,
+                t_observability * 86400,  # t_visibility in seconds
+                t_observability,  # t_observability in days
+                t_validity,  # t_validity in days
             )
 
         # Create the VOTable XML as a string and return it
