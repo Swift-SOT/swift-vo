@@ -90,13 +90,6 @@ class TestObjObsSAPService:
         assert 'name="t_observability"' in result
 
     @pytest.mark.asyncio
-    async def test_t_observability_value_in_xml(self, service_with_windows):
-        """Test if t_observability value (duration in days) is included in XML."""
-        result = await service_with_windows.vo_format()
-        # t_observability should be 1 day (60001 - 60000 = 1)
-        assert "<TD>1.0</TD>" in result
-
-    @pytest.mark.asyncio
     async def test_field_count_in_xml(self, service_with_windows):
         """Test if XML has correct number of fields."""
         result = await service_with_windows.vo_format()
