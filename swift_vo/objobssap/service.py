@@ -101,6 +101,14 @@ class ObjObsSAPService:
             [
                 Field(
                     votable,
+                    name="t_validity",
+                    datatype="double",
+                    ucd="time.validity",
+                    utype="Char.TimeAxis.Coverage.Time",
+                    unit="d",
+                ),
+                Field(
+                    votable,
                     name="t_start",
                     datatype="double",
                     ucd="time.start",
@@ -132,8 +140,10 @@ class ObjObsSAPService:
         for i in range(0, n_windows):
             t_start = self.windows[i][0]
             t_stop = self.windows[i][1]
+            t_validity = self.windows[0][0] + 10
             t_observability = t_stop - t_start  # Duration in days
             table.array[i] = (
+                t_validity,
                 t_start,
                 t_stop,
                 t_observability * 86400,  # t_observability in seconds

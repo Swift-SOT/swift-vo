@@ -90,12 +90,18 @@ class TestObjObsSAPService:
         assert 'name="t_observability"' in result
 
     @pytest.mark.asyncio
+    async def test_t_validity_field_in_xml(self, service_with_windows):
+        """Test if t_validity field is defined in XML."""
+        result = await service_with_windows.vo_format()
+        assert 'name="t_validity"' in result
+
+    @pytest.mark.asyncio
     async def test_field_count_in_xml(self, service_with_windows):
         """Test if XML has correct number of fields."""
         result = await service_with_windows.vo_format()
         field_count = result.count("<FIELD")
         # Verify we have all expected fields: t_start, t_stop, t_observability
-        expected_fields = ["t_start", "t_stop", "t_observability"]
+        expected_fields = ["t_validity", "t_start", "t_stop", "t_observability"]
         assert field_count == len(expected_fields)
         for field in expected_fields:
             assert f'name="{field}"' in result
