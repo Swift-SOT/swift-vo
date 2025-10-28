@@ -1,3 +1,4 @@
+import re
 from datetime import UTC, datetime
 from io import BytesIO
 
@@ -140,4 +141,5 @@ class ObjObsSAPService:
             votable.to_xml(stream)
             stream.seek(0)
             xml_out = stream.read().decode()
-        return xml_out
+
+        return re.sub(r'(value="[^"]*?)&amp;([^"]*?")', r"\1&\2", xml_out)
