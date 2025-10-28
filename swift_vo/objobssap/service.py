@@ -76,7 +76,7 @@ class ObjObsSAPService:
             "NASA Neil Gehrels Swift Observatory Science Operations Center - "
             + "Object Observability Simple Access Protocol (ObjObsSAP)"
         )
-        resource.infos.append(Info(name="query_status", value="OK"))
+        resource.infos.append(Info(name="QUERY_STATUS", value="OK"))
 
         service_protocol_info = Info(name="SERVICE_PROTOCOL", value="ivo://ivoa.net/std/ObjObsSAP")
         resource.infos.append(service_protocol_info)
