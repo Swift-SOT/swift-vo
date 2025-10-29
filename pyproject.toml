@@ -28,14 +28,12 @@ dependencies = [
 
 # On a mac, install optional dependencies with `pip install '.[dev]'` (include the single quotes)
 [project.optional-dependencies]
-dev = [
-    "jupyter",    # Clears output from Jupyter notebooks
-    "mypy",       # Used for static type checking of files
+dev = [ # Clears output from Jupyter notebooks
+    "mypy", # Used for static type checking of files
     "pre-commit", # Used to run checks before finalizing a git commit
     "pytest",
     "pytest-cov", # Used to report total code coverage
-    "ruff",       # Used for static linting of files
-    "ipykernel>=6.0.0,<7.0.0",
+    "ruff",
     "pytest-asyncio>=0.26.0",
 ]
 

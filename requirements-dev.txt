@@ -8,37 +8,14 @@ anyio==4.11.0
     # via
     #   asyncer
     #   httpx
-    #   jupyter-server
     #   starlette
     #   watchfiles
-appnope==0.1.4
-    # via ipykernel
-argon2-cffi==25.1.0
-    # via jupyter-server
-argon2-cffi-bindings==25.1.0
-    # via argon2-cffi
-arrow==1.4.0
-    # via isoduration
 astropy==7.1.1
     # via swift-vo (pyproject.toml)
 astropy-iers-data==0.2025.10.27.0.39.10
     # via astropy
-asttokens==3.0.0
-    # via stack-data
-async-lru==2.0.5
-    # via jupyterlab
 asyncer==0.0.10
     # via swift-vo (pyproject.toml)
-attrs==25.4.0
-    # via
-    #   jsonschema
-    #   referencing
-babel==2.17.0
-    # via jupyterlab-server
-beautifulsoup4==4.14.2
-    # via nbconvert
-bleach==6.3.0
-    # via nbconvert
 boto3==1.40.61
     # via swifttools
 botocore==1.40.61
@@ -50,8 +27,6 @@ certifi==2025.10.5
     #   httpcore
     #   httpx
     #   requests
-cffi==2.0.0
-    # via argon2-cffi-bindings
 cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.4.4
@@ -61,18 +36,8 @@ click==8.3.0
     #   rich-toolkit
     #   typer
     #   uvicorn
-comm==0.2.3
-    # via
-    #   ipykernel
-    #   ipywidgets
 coverage==7.11.0
     # via pytest-cov
-debugpy==1.8.17
-    # via ipykernel
-decorator==5.2.1
-    # via ipython
-defusedxml==0.7.1
-    # via nbconvert
 distlib==0.4.0
     # via virtualenv
 dnspython==2.8.0
@@ -81,18 +46,12 @@ ecdsa==0.19.1
     # via python-jose
 email-validator==2.3.0
     # via fastapi
-executing==2.2.1
-    # via stack-data
 fastapi==0.120.2
     # via swift-vo (pyproject.toml)
 fastapi-cli==0.0.14
     # via fastapi
-fastjsonschema==2.21.2
-    # via nbformat
 filelock==3.20.0
     # via virtualenv
-fqdn==1.5.1
-    # via jsonschema
 gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
 h11==0.16.0
@@ -105,9 +64,7 @@ httpcore==1.0.9
 httptools==0.7.1
     # via uvicorn
 httpx==0.28.1
-    # via
-    #   fastapi
-    #   jupyterlab
+    # via fastapi
 identify==2.6.15
     # via pre-commit
 idna==3.11
@@ -115,137 +72,27 @@ idna==3.11
     #   anyio
     #   email-validator
     #   httpx
-    #   jsonschema
     #   requests
 iniconfig==2.3.0
     # via pytest
-ipykernel==6.31.0
-    # via
-    #   swift-vo (pyproject.toml)
-    #   jupyter
-    #   jupyter-console
-    #   jupyterlab
-ipython==9.6.0
-    # via
-    #   ipykernel
-    #   ipywidgets
-    #   jupyter-console
-ipython-pygments-lexers==1.1.1
-    # via ipython
-ipywidgets==8.1.7
-    # via jupyter
-isoduration==20.11.0
-    # via jsonschema
-jedi==0.19.2
-    # via ipython
 jinja2==3.1.6
-    # via
-    #   fastapi
-    #   jupyter-server
-    #   jupyterlab
-    #   jupyterlab-server
-    #   nbconvert
+    # via fastapi
 jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-json5==0.12.1
-    # via jupyterlab-server
-jsonpointer==3.0.0
-    # via jsonschema
-jsonschema==4.25.1
-    # via
-    #   jupyter-events
-    #   jupyterlab-server
-    #   nbformat
-jsonschema-specifications==2025.9.1
-    # via jsonschema
-jupyter==1.1.1
-    # via swift-vo (pyproject.toml)
-jupyter-client==8.6.3
-    # via
-    #   ipykernel
-    #   jupyter-console
-    #   jupyter-server
-    #   nbclient
-jupyter-console==6.6.3
-    # via jupyter
-jupyter-core==5.9.1
-    # via
-    #   ipykernel
-    #   jupyter-client
-    #   jupyter-console
-    #   jupyter-server
-    #   jupyterlab
-    #   nbclient
-    #   nbconvert
-    #   nbformat
-jupyter-events==0.12.0
-    # via jupyter-server
-jupyter-lsp==2.3.0
-    # via jupyterlab
-jupyter-server==2.17.0
-    # via
-    #   jupyter-lsp
-    #   jupyterlab
-    #   jupyterlab-server
-    #   notebook
-    #   notebook-shim
-jupyter-server-terminals==0.5.3
-    # via jupyter-server
-jupyterlab==4.4.10
-    # via
-    #   jupyter
-    #   notebook
-jupyterlab-pygments==0.3.0
-    # via nbconvert
-jupyterlab-server==2.28.0
-    # via
-    #   jupyterlab
-    #   notebook
-jupyterlab-widgets==3.0.15
-    # via ipywidgets
-lark==1.3.1
-    # via rfc3987-syntax
 markdown-it-py==4.0.0
     # via rich
 markupsafe==3.0.3
-    # via
-    #   jinja2
-    #   nbconvert
-matplotlib-inline==0.2.1
-    # via
-    #   ipykernel
-    #   ipython
+    # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-mistune==3.1.4
-    # via nbconvert
 mypy==1.18.2
     # via swift-vo (pyproject.toml)
 mypy-extensions==1.1.0
     # via mypy
-nbclient==0.10.2
-    # via nbconvert
-nbconvert==7.16.6
-    # via
-    #   jupyter
-    #   jupyter-server
-nbformat==5.10.4
-    # via
-    #   jupyter-server
-    #   nbclient
-    #   nbconvert
-nest-asyncio==1.6.0
-    # via ipykernel
 nodeenv==1.9.1
     # via pre-commit
-notebook==7.4.7
-    # via jupyter
-notebook-shim==0.2.4
-    # via
-    #   jupyterlab
-    #   notebook
 numpy==2.3.4
     # via
     #   astropy
@@ -256,53 +103,23 @@ packaging==25.0
     # via
     #   astropy
     #   gunicorn
-    #   ipykernel
-    #   jupyter-events
-    #   jupyter-server
-    #   jupyterlab
-    #   jupyterlab-server
-    #   nbconvert
     #   pytest
 pandas==2.3.3
     # via swifttools
-pandocfilters==1.5.1
-    # via nbconvert
-parso==0.8.5
-    # via jedi
 pathspec==0.12.1
     # via mypy
-pexpect==4.9.0
-    # via ipython
 platformdirs==4.5.0
-    # via
-    #   jupyter-core
-    #   virtualenv
+    # via virtualenv
 pluggy==1.6.0
     # via
     #   pytest
     #   pytest-cov
 pre-commit==4.3.0
     # via swift-vo (pyproject.toml)
-prometheus-client==0.23.1
-    # via jupyter-server
-prompt-toolkit==3.0.52
-    # via
-    #   ipython
-    #   jupyter-console
-psutil==7.1.2
-    # via ipykernel
-ptyprocess==0.7.0
-    # via
-    #   pexpect
-    #   terminado
-pure-eval==0.2.3
-    # via stack-data
 pyasn1==0.6.1
     # via
     #   python-jose
     #   rsa
-pycparser==2.23
-    # via cffi
 pydantic==2.12.3
     # via fastapi
 pydantic-core==2.41.4
@@ -311,10 +128,6 @@ pyerfa==2.0.1.5
     # via astropy
 pygments==2.19.2
     # via
-    #   ipython
-    #   ipython-pygments-lexers
-    #   jupyter-console
-    #   nbconvert
     #   pytest
     #   rich
 pytest==8.4.2
@@ -328,16 +141,12 @@ pytest-cov==7.0.0
     # via swift-vo (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via
-    #   arrow
     #   botocore
-    #   jupyter-client
     #   pandas
 python-dotenv==1.2.1
     # via uvicorn
 python-jose==3.5.0
     # via swifttools
-python-json-logger==4.0.0
-    # via jupyter-events
 python-multipart==0.0.20
     # via fastapi
 pytz==2025.2
@@ -345,107 +154,40 @@ pytz==2025.2
 pyyaml==6.0.3
     # via
     #   astropy
-    #   jupyter-events
     #   pre-commit
     #   uvicorn
-pyzmq==27.1.0
-    # via
-    #   ipykernel
-    #   jupyter-client
-    #   jupyter-console
-    #   jupyter-server
-referencing==0.37.0
-    # via
-    #   jsonschema
-    #   jsonschema-specifications
-    #   jupyter-events
 requests==2.32.5
-    # via
-    #   jupyterlab-server
-    #   swifttools
-rfc3339-validator==0.1.4
-    # via
-    #   jsonschema
-    #   jupyter-events
-rfc3986-validator==0.1.1
-    # via
-    #   jsonschema
-    #   jupyter-events
-rfc3987-syntax==1.1.0
-    # via jsonschema
+    # via swifttools
 rich==14.2.0
     # via
     #   rich-toolkit
     #   typer
 rich-toolkit==0.15.1
     # via fastapi-cli
-rpds-py==0.28.0
-    # via
-    #   jsonschema
-    #   referencing
 rsa==4.9.1
     # via python-jose
 ruff==0.14.2
     # via swift-vo (pyproject.toml)
 s3transfer==0.14.0
     # via boto3
-send2trash==1.8.3
-    # via jupyter-server
-setuptools==80.9.0
-    # via jupyterlab
 shellingham==1.5.4
     # via typer
 six==1.17.0
     # via
     #   ecdsa
     #   python-dateutil
-    #   rfc3339-validator
 sniffio==1.3.1
     # via anyio
-soupsieve==2.8
-    # via beautifulsoup4
-stack-data==0.6.3
-    # via ipython
 starlette==0.49.1
     # via fastapi
 swifttools==3.0.23
     # via swift-vo (pyproject.toml)
 tabulate==0.9.0
     # via swifttools
-terminado==0.18.1
-    # via
-    #   jupyter-server
-    #   jupyter-server-terminals
-tinycss2==1.4.0
-    # via bleach
-tornado==6.5.2
-    # via
-    #   ipykernel
-    #   jupyter-client
-    #   jupyter-server
-    #   jupyterlab
-    #   notebook
-    #   terminado
-traitlets==5.14.3
-    # via
-    #   ipykernel
-    #   ipython
-    #   ipywidgets
-    #   jupyter-client
-    #   jupyter-console
-    #   jupyter-core
-    #   jupyter-events
-    #   jupyter-server
-    #   jupyterlab
-    #   matplotlib-inline
-    #   nbclient
-    #   nbconvert
-    #   nbformat
 typer==0.20.0
     # via fastapi-cli
 typing-extensions==4.15.0
     # via
-    #   beautifulsoup4
     #   fastapi
     #   mypy
     #   pydantic
@@ -456,11 +198,7 @@ typing-extensions==4.15.0
 typing-inspection==0.4.2
     # via pydantic
 tzdata==2025.2
-    # via
-    #   arrow
-    #   pandas
-uri-template==1.3.0
-    # via jsonschema
+    # via pandas
 urllib3==2.5.0
     # via
     #   botocore
@@ -476,17 +214,5 @@ virtualenv==20.35.4
     # via pre-commit
 watchfiles==1.1.1
     # via uvicorn
-wcwidth==0.2.14
-    # via prompt-toolkit
-webcolors==24.11.1
-    # via jsonschema
-webencodings==0.5.1
-    # via
-    #   bleach
-    #   tinycss2
-websocket-client==1.9.0
-    # via jupyter-server
 websockets==15.0.1
     # via uvicorn
-widgetsnbextension==4.0.14
-    # via ipywidgets
