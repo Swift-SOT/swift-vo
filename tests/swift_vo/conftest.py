@@ -31,12 +31,6 @@ def service_with_windows():
 
 
 @pytest.fixture
-def service_with_maxrec_zero():
-    """Fixture providing a service with maxrec=0."""
-    return ObjObsSAPService(10.5, 20.3, 60000, 60001, 1500, maxrec=0)
-
-
-@pytest.fixture
 def valid_pos():
     """Valid position string."""
     return "10.5,20.3"
@@ -81,3 +75,15 @@ def valid_position():
 def valid_time_range():
     """Fixture for a valid VOTimeRange."""
     return VOTimeRange(t_min=50000.0, t_max=60000.0)
+
+
+@pytest.fixture
+def expected_fields():
+    """Expected field names in the VO format XML."""
+    return ["t_validity", "t_start", "t_stop", "t_observability"]
+
+
+@pytest.fixture
+def field(request, expected_fields):
+    """Fixture to get expected field names by index."""
+    return expected_fields[request.param]

@@ -21,6 +21,7 @@ dependencies = [
     "uvicorn>=0.34.0",
     "asyncer>=0.0.8",
     "h11>=0.16.0",
+    "vo-models>=0.5.1",
 ]
 
 [project.urls]
