@@ -81,6 +81,8 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
+lxml==6.0.2
+    # via pydantic-xml
 markdown-it-py==4.0.0
     # via rich
 markupsafe==3.0.3
@@ -121,9 +123,16 @@ pyasn1==0.6.1
     #   python-jose
     #   rsa
 pydantic==2.12.3
-    # via fastapi
+    # via
+    #   fastapi
+    #   pydantic-xml
+    #   vo-models
 pydantic-core==2.41.4
-    # via pydantic
+    # via
+    #   pydantic
+    #   pydantic-xml
+pydantic-xml==2.18.0
+    # via vo-models
 pyerfa==2.0.1.5
     # via astropy
 pygments==2.19.2
@@ -188,11 +197,14 @@ typer==0.20.0
     # via fastapi-cli
 typing-extensions==4.15.0
     # via
+    #   anyio
     #   fastapi
     #   mypy
     #   pydantic
     #   pydantic-core
+    #   pytest-asyncio
     #   rich-toolkit
+    #   starlette
     #   typer
     #   typing-inspection
 typing-inspection==0.4.2
@@ -212,6 +224,8 @@ uvloop==0.22.1
     # via uvicorn
 virtualenv==20.35.4
     # via pre-commit
+vo-models==0.5.1
+    # via swift-vo (pyproject.toml)
 watchfiles==1.1.1
     # via uvicorn
 websockets==15.0.1
