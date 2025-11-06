@@ -29,7 +29,7 @@ SERVICE_STARTUP_TIME = datetime.now(UTC).isoformat()
         }
     },
 )
-async def availability():
+async def availability() -> Response:
     """
     VOSI-availability endpoint.
 
