@@ -24,7 +24,7 @@ class TestVOSIAvailability:
         """Test that the availability endpoint returns XML declaration."""
         response = client.get("/objobssap/availability")
         content = response.content.decode("utf-8")
-        assert "<?xml version='1.0' encoding='UTF-8'" in content
+        assert "<?xml version='1.0' encoding='UTF-8'?>" in content
 
     def test_availability_namespace(self):
         """Test that the availability endpoint returns correct namespace."""
@@ -73,7 +73,7 @@ class TestVOSICapabilities:
         """Test that the capabilities response contains XML declaration."""
         response = client.get("/objobssap/capabilities")
         content = response.text
-        assert "<?xml version='1.0' encoding='UTF-8'" in content
+        assert "<?xml version='1.0' encoding='UTF-8'?>" in content
 
     def test_capabilities_namespace(self):
         """Test that the capabilities response contains VOSI capabilities namespace."""

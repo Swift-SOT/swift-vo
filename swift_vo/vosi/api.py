@@ -41,7 +41,7 @@ async def availability() -> Response:
     The endpoint follows IVOA VOSI (Virtual Observatory Support Interfaces) standard.
     """
     xml_content = Availability(available=True, up_since=SERVICE_STARTUP_TIME).to_xml(
-        encoding="UTF-8", standalone=True
+        encoding="UTF-8", xml_declaration=True
     )
     return Response(content=xml_content, media_type="application/xml")
 
@@ -100,7 +100,7 @@ async def capabilities():
     )
 
     return Response(
-        content=capabilities.to_xml(encoding="UTF-8", standalone=True), media_type="application/xml"
+        content=capabilities.to_xml(encoding="UTF-8", xml_declaration=True), media_type="application/xml"
     )
 
 
