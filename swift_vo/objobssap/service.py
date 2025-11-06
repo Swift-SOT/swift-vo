@@ -155,4 +155,4 @@ class ObjObsSAPService:
             stream.seek(0)
             xml_out = stream.read().decode()
 
-        return re.sub(r'(value="[^"]*?)&amp;([^"]*?")', r"\1&\2", xml_out)
+        return xml_out
