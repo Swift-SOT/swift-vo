@@ -76,14 +76,16 @@ async def objvissap(
     # Ensure the query_url uses the correct base URL
 
     parsed_url = urlparse(str(request.url))
-    fixed_url = urlunparse((
-        "https",
-        VO_SERVER,
-        parsed_url.path,
-        parsed_url.params,
-        parsed_url.query,
-        parsed_url.fragment,
-    ))
+    fixed_url = urlunparse(
+        (
+            "https",
+            VO_SERVER,
+            parsed_url.path,
+            parsed_url.params,
+            parsed_url.query,
+            parsed_url.fragment,
+        )
+    )
 
     xml_data = await vo.vo_format(query_url=str(fixed_url))
 
