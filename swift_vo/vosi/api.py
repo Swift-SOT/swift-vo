@@ -71,7 +71,7 @@ async def capabilities():
                 standard_id="ivo://ivoa.net/std/VOSI#capabilities",
                 interface=[
                     Interface(
-                        access_url=[AccessURL(value=f"{base_url}/capabilities", use="full")],
+                        access_url=[AccessURL(value=f"{base_url}/objobssap/capabilities", use="full")],
                         use="base",
                         version="1.0",
                     )
