@@ -1,4 +1,3 @@
-import re
 from datetime import UTC, datetime
 from io import BytesIO
 
