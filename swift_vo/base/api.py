@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from .. import __version__  # type: ignore
+from ..constants import VO_ROOT_PATH
 
 app = FastAPI(
     title="Swift VO",
@@ -10,7 +11,7 @@ app = FastAPI(
         "name": "Jamie Kennea",
         "email": "jak51@psu.edu",
     },
-    root_path="/vo",
+    root_path=VO_ROOT_PATH,
     version=__version__,
 )
 
