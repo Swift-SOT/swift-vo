@@ -20,11 +20,11 @@ class TestVOSIAvailability:
         response = client.get("/objobssap/availability")
         assert response.headers["content-type"] == "application/xml"
 
-    # def test_availability_xml_declaration(self):
-    #     """Test that the availability endpoint returns XML declaration."""
-    #     response = client.get("/objobssap/availability")
-    #     content = response.content.decode("utf-8")
-    #     assert '<?xml version="1.0" encoding="UTF-8"?>' in content
+    def test_availability_xml_declaration(self):
+        """Test that the availability endpoint returns XML declaration."""
+        response = client.get("/objobssap/availability")
+        content = response.content.decode("utf-8")
+        assert "<?xml version='1.0' encoding='UTF-8'" in content
 
     def test_availability_namespace(self):
         """Test that the availability endpoint returns correct namespace."""
@@ -69,11 +69,11 @@ class TestVOSICapabilities:
         response = client.get("/objobssap/capabilities")
         assert response.headers["content-type"] == "application/xml"
 
-    # def test_capabilities_xml_declaration(self):
-    #     """Test that the capabilities response contains XML declaration."""
-    #     response = client.get("/objobssap/capabilities")
-    #     content = response.text
-    #     assert '<?xml version="1.0" encoding="UTF-8"?>' in content
+    def test_capabilities_xml_declaration(self):
+        """Test that the capabilities response contains XML declaration."""
+        response = client.get("/objobssap/capabilities")
+        content = response.text
+        assert "<?xml version='1.0' encoding='UTF-8'" in content
 
     def test_capabilities_namespace(self):
         """Test that the capabilities response contains VOSI capabilities namespace."""

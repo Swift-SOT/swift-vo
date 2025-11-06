@@ -40,7 +40,9 @@ async def availability() -> Response:
     Returns the availability status of the service as required by DALI and ObjObsSAP specifications.
     The endpoint follows IVOA VOSI (Virtual Observatory Support Interfaces) standard.
     """
-    xml_content = Availability(available=True, up_since=SERVICE_STARTUP_TIME).to_xml()
+    xml_content = Availability(available=True, up_since=SERVICE_STARTUP_TIME).to_xml(
+        encoding="UTF-8", standalone=True
+    )
     return Response(content=xml_content, media_type="application/xml")
 
 
@@ -97,7 +99,9 @@ async def capabilities():
         ]
     )
 
-    return Response(content=capabilities.to_xml(), media_type="application/xml")
+    return Response(
+        content=capabilities.to_xml(encoding="UTF-8", standalone=True), media_type="application/xml"
+    )
 
 
 app.include_router(router)
