@@ -1,7 +1,10 @@
+from urllib.parse import urlparse, urlunparse
+
 from astropy.time import Time  # type: ignore[import-untyped]
 from fastapi import APIRouter, Depends, Query, Request, Response
 
 from ..base.api import app
+from ..constants import OBJOBSSAP_DEFAULT_LENGTH, VO_SERVER
 from .schema import VOPosition, VOTimeRange
 from .service import ObjObsSAPService
 
@@ -25,7 +28,7 @@ def parse_time(
     """Parses the time string into a VOTimeRange object."""
     if TIME is None:
         now = Time.now().mjd
-        TIME = f"{now}/{now + 7}"
+        TIME = f"{now}/{now + OBJOBSSAP_DEFAULT_LENGTH}"
     return VOTimeRange.from_string(TIME)
 
 
@@ -69,7 +72,13 @@ async def objvissap(
         upload=UPLOAD,
     )
     await vo.query()
-    xml_data = await vo.vo_format(query_url=str(request.url))
+
+    # Ensure the query_url uses the correct base URL
+
+    parsed_url = urlparse(str(request.url))
+    fixed_url = urlunparse(parsed_url._replace(scheme="https", netloc=VO_SERVER))
+
+    xml_data = await vo.vo_format(query_url=str(fixed_url))
 
     return Response(content=xml_data, media_type="application/x-votable+xml")
 
