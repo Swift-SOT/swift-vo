@@ -81,7 +81,7 @@ async def capabilities():
                 standard_id="ivo://ivoa.net/std/VOSI#availability",
                 interface=[
                     Interface(
-                        access_url=[AccessURL(value=f"{base_url}/availability", use="full")],
+                        access_url=[AccessURL(value=f"{base_url}/objobssap/availability", use="full")],
                         version="1.0",
                     )
                 ],
@@ -90,7 +90,7 @@ async def capabilities():
                 standard_id="ivo://ivoa.net/std/ObjObsSAP#query-1",
                 interface=[
                     Interface(
-                        access_url=[AccessURL(value=f"{base_url}//objobssap/query", use="full")],
+                        access_url=[AccessURL(value=f"{base_url}/objobssap/query", use="full")],
                         role="std",
                         version="1.0",
                     )
