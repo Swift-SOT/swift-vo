@@ -38,11 +38,16 @@ class TestVOSIAvailability:
         content = response.content.decode("utf-8")
         assert "<available>true</available>" in content
 
-    def test_availability_upsince_element(self):
-        """Test that the availability endpoint returns upSince element."""
+    def test_availability_upsince_element_open(self):
+        """Test that the availability endpoint returns upSince opening tag."""
         response = client.get("/objobssap/availability")
         content = response.content.decode("utf-8")
         assert "<upSince>" in content
+
+    def test_availability_upsince_element_close(self):
+        """Test that the availability endpoint returns upSince closing tag."""
+        response = client.get("/objobssap/availability")
+        content = response.content.decode("utf-8")
         assert "</upSince>" in content
 
     def test_availability_case_insensitive(self):
