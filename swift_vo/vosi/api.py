@@ -4,9 +4,8 @@ from datetime import UTC, datetime
 
 from fastapi import APIRouter, Response
 
-from swift_vo.constants import VO_ROOT_PATH, VO_SERVER
-
 from ..base.api import app
+from ..constants import VO_ROOT_PATH, VO_SERVER
 
 router = APIRouter(prefix="", tags=["VOSI"])
 
