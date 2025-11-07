@@ -168,11 +168,12 @@ class ObsLocTAPService:
         # Add observations to the table
         n_observations = len(self.observations)
         table.create_arrays(n_observations)
+        # For t_planning, we use the current time as the planning time (calculated once)
+        t_planning_mjd = Time.now().mjd
+        
         for i, obs in enumerate(self.observations):
             t_start_mjd = Time(obs.begin).mjd
             t_stop_mjd = Time(obs.end).mjd
-            # For t_planning, we use the current time as the planning time
-            t_planning_mjd = Time.now().mjd
 
             table.array[i] = (
                 str(obs.obsnum) if hasattr(obs, "obsnum") else f"obs_{i}",
