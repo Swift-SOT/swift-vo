@@ -11,30 +11,30 @@ from .service import ObjObsSAPService
 router = APIRouter(prefix="/objobssap", tags=["ObjObsSAP"])
 
 
-def parse_pos(POS: str = Query(..., description="Position in 'RA,DEC' format")) -> VOPosition:
+def parse_pos(pos: str = Query(..., description="Position in 'RA,DEC' format")) -> VOPosition:
     """Parses the position string into a VOPosition object."""
-    return VOPosition.from_string(POS)
+    return VOPosition.from_string(pos)
 
 
 def parse_time(
-    TIME: str | None = Query(
+    time: str | None = Query(
         default=None,
         description=(
-            "Time range in 'T_MIN/T_MAX' format. Defaults to current date through"
-            " 7 days from now if not provided."
+            "Time range in 'T_MIN/T_MAX' format. Defaults to current date"
+            " through 7 days from now if not provided."
         ),
     ),
 ) -> VOTimeRange:
     """Parses the time string into a VOTimeRange object."""
-    if TIME is None:
+    if time is None:
         now = Time.now().mjd
-        TIME = f"{now}/{now + OBJOBSSAP_DEFAULT_LENGTH}"
-    return VOTimeRange.from_string(TIME)
+        time = f"{now}/{now + OBJOBSSAP_DEFAULT_LENGTH}"
+    return VOTimeRange.from_string(time)
 
 
-def parse_min_obs(MIN_OBS: float = Query(default=0, description="Minimum observation threshold")) -> float:
+def parse_min_obs(min_obs: float = Query(default=0, description="Minimum observation threshold")) -> float:
     """Parses the minimum observation threshold."""
-    return float(MIN_OBS)
+    return float(min_obs)
 
 
 @router.get(
@@ -56,8 +56,8 @@ async def objvissap(
     position: VOPosition = Depends(parse_pos),
     time: VOTimeRange = Depends(parse_time),
     min_obs: float = Depends(parse_min_obs),
-    MAXREC: int | None = Query(default=None, description="Maximum number of records to return"),
-    UPLOAD: str | None = Query(
+    maxrec: int | None = Query(default=None, description="Maximum number of records to return"),
+    upload: str | None = Query(
         default=None, description="Not used for ObjObsSAP, but included for consistency"
     ),
 ):
@@ -68,8 +68,8 @@ async def objvissap(
         t_min=time.t_min,
         t_max=time.t_max,
         min_obs=min_obs,
-        maxrec=MAXREC,
-        upload=UPLOAD,
+        maxrec=maxrec,
+        upload=upload,
     )
     await vo.query()
 

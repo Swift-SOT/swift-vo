@@ -58,10 +58,10 @@ def valid_maxrec():
 def query_params(valid_pos, valid_time, valid_min_obs, valid_maxrec):
     """Common query parameters for endpoint tests."""
     return {
-        "POS": valid_pos,
-        "TIME": valid_time,
-        "MIN_OBS": valid_min_obs,
-        "MAXREC": valid_maxrec,
+        "pos": valid_pos,
+        "time": valid_time,
+        "min_obs": valid_min_obs,
+        "maxrec": valid_maxrec,
     }
 
 

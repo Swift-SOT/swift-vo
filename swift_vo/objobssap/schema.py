@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from astropy.time import Time  # type: ignore[import-untyped]
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
@@ -15,7 +17,7 @@ class VOTimeRange(BaseModel):
     t_max: float
 
     @classmethod
-    def from_string(cls, value: str) -> "VOTimeRange":
+    def from_string(cls, value: str) -> VOTimeRange:
         """Parses 'T_MIN,T_MAX' string format into TimeRange object."""
         try:
             tmin, tmax = value.split("/")
@@ -36,7 +38,7 @@ class VOPosition(BaseModel):
     s_dec: float
 
     @classmethod
-    def from_string(cls, value: str) -> "VOPosition":
+    def from_string(cls, value: str) -> VOPosition:
         """Parses 'RA,DEC' string format into RADEC object."""
         try:
             ra, dec = map(float, value.split(","))
