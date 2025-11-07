@@ -92,6 +92,6 @@ class TestObjObsSAP:
         assert response.status_code == 422
 
     def test_default_time(self, valid_pos, valid_min_obs):
-        """Test the that endpoint doesn't require TIME."""
+        """Test that the endpoint doesn't require TIME."""
         response = client.get("/ObjObsSAP/query", params={"pos": valid_pos, "min_obs": valid_min_obs})
         assert response.status_code == 200
