@@ -102,7 +102,7 @@ class TestVOSICapabilities:
         """Test that the query capability is present."""
         response = client.get("/objobssap/capabilities")
         content = response.text
-        assert "ivo://ivoa.net/std/ObjObsSAP#query-1" in content
+        assert "ivo://ivoa.net/std/ObjObsSAP#query-0.3" in content
 
     def test_capabilities_has_capabilities_url(self):
         """Test that the capabilities access URL is present."""

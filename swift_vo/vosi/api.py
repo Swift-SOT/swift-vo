@@ -87,7 +87,7 @@ async def capabilities():
                 ],
             ),
             Capability(
-                standard_id="ivo://ivoa.net/std/ObjObsSAP#query-1",
+                standard_id="ivo://ivoa.net/std/ObjObsSAP#query-0.3",
                 interface=[
                     Interface(
                         access_url=[AccessURL(value=f"{base_url}/objobssap/query", use="full")],
