@@ -144,7 +144,7 @@ pytest==8.4.2
     #   swift-vo (pyproject.toml)
     #   pytest-asyncio
     #   pytest-cov
-pytest-asyncio==1.2.0
+pytest-asyncio==1.3.0
     # via swift-vo (pyproject.toml)
 pytest-cov==7.0.0
     # via swift-vo (pyproject.toml)
