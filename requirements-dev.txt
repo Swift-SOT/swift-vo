@@ -89,7 +89,7 @@ markupsafe==3.0.3
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-mypy==1.18.2
+mypy==1.19.1
     # via swift-vo (pyproject.toml)
 mypy-extensions==1.1.0
     # via mypy
