@@ -93,7 +93,7 @@ mypy==1.18.2
     # via swift-vo (pyproject.toml)
 mypy-extensions==1.1.0
     # via mypy
-nodeenv==1.9.1
+nodeenv==1.10.0
     # via pre-commit
 numpy==2.3.5
     # via
