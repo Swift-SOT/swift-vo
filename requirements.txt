@@ -116,7 +116,7 @@ python-dotenv==1.2.1
     # via uvicorn
 python-jose==3.5.0
     # via swifttools
-python-multipart==0.0.20
+python-multipart==0.0.22
     # via fastapi
 pytz==2025.2
     # via pandas
