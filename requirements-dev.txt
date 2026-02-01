@@ -81,6 +81,8 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
+librt==0.7.8
+    # via mypy
 lxml==6.0.2
     # via pydantic-xml
 markdown-it-py==4.0.0
@@ -197,14 +199,11 @@ typer==0.20.0
     # via fastapi-cli
 typing-extensions==4.15.0
     # via
-    #   anyio
     #   fastapi
     #   mypy
     #   pydantic
     #   pydantic-core
-    #   pytest-asyncio
     #   rich-toolkit
-    #   starlette
     #   typer
     #   typing-inspection
 typing-inspection==0.4.2
