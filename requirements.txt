@@ -89,7 +89,7 @@ packaging==25.0
     #   gunicorn
 pandas==2.3.3
     # via swifttools
-pyasn1==0.6.1
+pyasn1==0.6.2
     # via
     #   python-jose
     #   rsa

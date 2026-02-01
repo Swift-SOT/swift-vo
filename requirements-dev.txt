@@ -118,7 +118,7 @@ pluggy==1.6.0
     #   pytest-cov
 pre-commit==4.3.0
     # via swift-vo (pyproject.toml)
-pyasn1==0.6.1
+pyasn1==0.6.2
     # via
     #   python-jose
     #   rsa
