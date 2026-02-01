@@ -50,7 +50,7 @@ fastapi==0.120.4
     # via swift-vo (pyproject.toml)
 fastapi-cli==0.0.14
     # via fastapi
-filelock==3.20.1
+filelock==3.20.3
     # via virtualenv
 gunicorn==23.0.0
     # via swift-vo (pyproject.toml)
@@ -211,7 +211,7 @@ typing-inspection==0.4.2
     # via pydantic
 tzdata==2025.2
     # via pandas
-urllib3==2.6.0
+urllib3==2.6.3
     # via
     #   botocore
     #   requests
@@ -222,7 +222,7 @@ uvicorn==0.38.0
     #   fastapi-cli
 uvloop==0.22.1
     # via uvicorn
-virtualenv==20.35.4
+virtualenv==20.36.1
     # via pre-commit
 vo-models==0.5.1
     # via swift-vo (pyproject.toml)
