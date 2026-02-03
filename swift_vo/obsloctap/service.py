@@ -10,13 +10,13 @@ from astropy.io.votable.tree import (  # type: ignore[import-untyped]
 )
 from astropy.time import Time  # type: ignore[import-untyped]
 from asyncer import asyncify
-from swifttools.swift_too import PlanQuery  # type: ignore[import-untyped]
+from swifttools.swift_too import ObsQuery, PlanQuery  # type: ignore[import-untyped]
 
 
 class ObsLocTAPService:
     """
     This class is the service class for the ObsLocTAP service.
-    Implements a simple cone search for planned Swift observations.
+    Implements a simple cone search for planned and executed Swift observations.
     """
 
     def __init__(self, s_ra, s_dec, s_radius, t_min, t_max, maxrec=None):
@@ -31,34 +31,76 @@ class ObsLocTAPService:
             Declination in degrees
         s_radius : float
             Search radius in degrees
-        t_min : float
-            Start time in MJD
-        t_max : float
-            End time in MJD
+        t_min : float or None
+            Start time in MJD, or None for no time filtering
+        t_max : float or None
+            End time in MJD, or None for no time filtering
         maxrec : int, optional
             Maximum number of records to return
         """
         self.s_ra = s_ra
         self.s_dec = s_dec
         self.s_radius = s_radius
-        self.t_min = Time(t_min, format="mjd").datetime
-        self.t_max = Time(t_max, format="mjd").datetime
+        self.t_min = Time(t_min, format="mjd").datetime if t_min is not None else None
+        self.t_max = Time(t_max, format="mjd").datetime if t_max is not None else None
         self.maxrec = maxrec
         self.observations = []
 
     async def query(self):
         """
-        Query the Swift Pre-Planned Science Timeline for observations.
+        Query the Swift As-Flown Science Timeline and Pre-Planned Science Timeline for observations.
+
+        Retrieves both executed observations (from ObsQuery) and planned observations (from PlanQuery).
+        To avoid duplication, only planned observations starting after the most recent executed observation
+        are included.
         """
+        # First, get executed observations from ObsQuery
+        executed_obs = []
+        most_recent_exec_time = None
+
         if self.maxrec != 0:
-            plan_query = await asyncify(PlanQuery)(
-                ra=self.s_ra,
-                dec=self.s_dec,
-                radius=self.s_radius,
-                begin=self.t_min,
-                end=self.t_max,
-            )
-            self.observations = plan_query.entries
+            query_kwargs = {
+                "ra": self.s_ra,
+                "dec": self.s_dec,
+                "radius": self.s_radius,
+            }
+            if self.t_min is not None:
+                query_kwargs["begin"] = self.t_min
+            if self.t_max is not None:
+                query_kwargs["end"] = self.t_max
+            obs_query = await asyncify(ObsQuery)(**query_kwargs)
+            executed_obs = obs_query.entries
+
+            # Track the most recent execution end time to filter planned observations
+            if executed_obs:
+                most_recent_exec_time = max(Time(obs.end).mjd for obs in executed_obs)
+
+        # Then, get planned observations from PlanQuery
+        planned_obs = []
+        if self.maxrec != 0:
+            query_kwargs = {
+                "ra": self.s_ra,
+                "dec": self.s_dec,
+                "radius": self.s_radius,
+            }
+            if self.t_min is not None:
+                query_kwargs["begin"] = self.t_min
+            if self.t_max is not None:
+                query_kwargs["end"] = self.t_max
+            plan_query = await asyncify(PlanQuery)(**query_kwargs)
+            # Filter planned observations: only include those starting after the most recent execution
+            if most_recent_exec_time is not None:
+                planned_obs = [
+                    obs for obs in plan_query.entries if Time(obs.begin).mjd > most_recent_exec_time
+                ]
+            else:
+                planned_obs = plan_query.entries
+
+        # Combine observations: executed first, then planned
+        # Each entry is a tuple of (observation, execution_status)
+        self.observations = [(obs, "executed") for obs in executed_obs] + [
+            (obs, "planned") for obs in planned_obs
+        ]
 
         if self.maxrec is not None and len(self.observations) > self.maxrec:
             self.observations = self.observations[: self.maxrec]
@@ -106,7 +148,8 @@ class ObsLocTAPService:
         )
 
         resource.infos.append(Info(name="POS", value=f"{self.s_ra},{self.s_dec},{self.s_radius}"))
-        resource.infos.append(Info(name="TIME", value=f"{Time(self.t_min).mjd}/{Time(self.t_max).mjd}"))
+        if self.t_min is not None and self.t_max is not None:
+            resource.infos.append(Info(name="TIME", value=f"{Time(self.t_min).mjd}/{Time(self.t_max).mjd}"))
         if self.maxrec is not None:
             resource.infos.append(Info(name="MAXREC", value=str(self.maxrec)))
 
@@ -162,6 +205,13 @@ class ObsLocTAPService:
                     arraysize="*",
                     ucd="meta.id;src",
                 ),
+                Field(
+                    votable,
+                    name="execution_status",
+                    datatype="char",
+                    arraysize="*",
+                    ucd="meta.version",
+                ),
             ]
         )
 
@@ -171,7 +221,7 @@ class ObsLocTAPService:
         # For t_planning, we use the current time as the planning time (calculated once)
         t_planning_mjd = Time.now().mjd
 
-        for i, obs in enumerate(self.observations):
+        for i, (obs, execution_status) in enumerate(self.observations):
             t_start_mjd = Time(obs.begin).mjd
             t_stop_mjd = Time(obs.end).mjd
 
@@ -182,7 +232,8 @@ class ObsLocTAPService:
                 t_planning_mjd,
                 t_start_mjd,
                 t_stop_mjd,
-                obs.target_name if hasattr(obs, "target_name") else "Unknown",
+                obs.targname if hasattr(obs, "targname") else "Unknown",
+                execution_status,
             )
 
         # Create the VOTable XML as a string and return it

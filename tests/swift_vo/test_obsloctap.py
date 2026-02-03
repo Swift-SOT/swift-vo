@@ -44,9 +44,7 @@ class TestParseTime:
     def test_default_time(self):
         """Test the parsing with default time (None)."""
         time = parse_time(None)
-        assert time.t_min is not None
-        assert time.t_max is not None
-        assert time.t_max > time.t_min
+        assert time is None
 
     def test_invalid(self):
         """Test the parsing of an invalid time value."""
