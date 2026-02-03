@@ -170,7 +170,7 @@ class ObsLocTAPService:
         table.create_arrays(n_observations)
         # For t_planning, we use the current time as the planning time (calculated once)
         t_planning_mjd = Time.now().mjd
-        
+
         for i, obs in enumerate(self.observations):
             t_start_mjd = Time(obs.begin).mjd
             t_stop_mjd = Time(obs.end).mjd

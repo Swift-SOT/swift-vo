@@ -12,7 +12,7 @@ router = APIRouter(prefix="/obsloctap", tags=["ObsLocTAP"])
 
 
 def parse_pos(
-    pos: str = Query(..., description="Position in 'RA,DEC' or 'RA,DEC,RADIUS' format")
+    pos: str = Query(..., description="Position in 'RA,DEC' or 'RA,DEC,RADIUS' format"),
 ) -> ObsLocTAPPosition:
     """Parses the position string into an ObsLocTAPPosition object."""
     return ObsLocTAPPosition.from_string(pos)
