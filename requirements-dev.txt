@@ -125,7 +125,7 @@ pydantic==2.12.5
     #   pydantic-settings
     #   pydantic-xml
     #   vo-models
-pydantic-core==2.41.5
+pydantic-core==2.42.0
     # via
     #   pydantic
     #   pydantic-xml
