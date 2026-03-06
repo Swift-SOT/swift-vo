@@ -144,7 +144,7 @@ class ObsLocTAPService:
 
         resource.infos.append(Info(name="REQUEST", value=query_url))
         resource.infos.append(
-            Info(name="REQUEST_DATE", value=request_date_string, content="Query execution date")
+            Info(name="REQUEST_DATE", value=request_date_string)
         )
 
         resource.infos.append(Info(name="POS", value=f"{self.s_ra},{self.s_dec},{self.s_radius}"))
