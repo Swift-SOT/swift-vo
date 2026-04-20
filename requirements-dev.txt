@@ -131,7 +131,7 @@ pydantic-core==2.41.5
     #   pydantic-xml
 pydantic-extra-types==2.11.0
     # via fastapi
-pydantic-settings==2.12.0
+pydantic-settings==2.13.1
     # via fastapi
 pydantic-xml==2.18.0
     # via vo-models
