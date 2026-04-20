@@ -118,13 +118,13 @@ python-dotenv==1.2.1
     # via
     #   pydantic-settings
     #   uvicorn
-python-multipart==0.0.22
+python-multipart==0.0.26
     # via fastapi
 pyyaml==6.0.3
     # via
     #   astropy
     #   uvicorn
-requests==2.33.0
+requests==2.33.1
     # via swifttools
 rich==14.3.1
     # via

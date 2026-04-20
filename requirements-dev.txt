@@ -143,7 +143,7 @@ pygments==2.19.2
     #   rich
 pyjwt==2.11.0
     # via swifttools
-pytest==9.0.2
+pytest==9.0.3
     # via
     #   swift-vo (pyproject.toml)
     #   pytest-asyncio
@@ -160,14 +160,14 @@ python-dotenv==1.2.1
     # via
     #   pydantic-settings
     #   uvicorn
-python-multipart==0.0.22
+python-multipart==0.0.26
     # via fastapi
 pyyaml==6.0.3
     # via
     #   astropy
     #   pre-commit
     #   uvicorn
-requests==2.33.0
+requests==2.33.1
     # via swifttools
 rich==14.3.1
     # via
