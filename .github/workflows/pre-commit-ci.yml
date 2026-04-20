@@ -25,8 +25,8 @@ jobs:
       run: |
         sudo apt-get update
         python -m pip install --upgrade pip
-        pip install .[dev]
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        python -m pip install --retries 5 --timeout 60 -r requirements-dev.txt
+        python -m pip install --no-deps -e .
     - uses: pre-commit/action@v3.0.1
       with:
         extra_args: --all-files --verbose
