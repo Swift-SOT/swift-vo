@@ -1,3 +1,5 @@
+from urllib.parse import quote
+
 import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
@@ -94,4 +96,17 @@ class TestObjObsSAP:
     def test_default_time(self, valid_pos, valid_min_obs):
         """Test that the endpoint doesn't require TIME."""
         response = client.get("/ObjObsSAP/query", params={"pos": valid_pos, "min_obs": valid_min_obs})
+        assert response.status_code == 200
+
+    def test_endpoint_accepts_mixed_case_query_parameters(self, valid_pos, valid_time, valid_min_obs):
+        """Test that query parameter names are handled case-insensitively."""
+        query_string = (
+            f"POS={quote(valid_pos)}&time={quote(valid_time)}&Min_Obs={quote(valid_min_obs)}&MAXREC=1"
+        )
+        response = client.get(f"/ObjObsSAP/query?{query_string}")
+        assert response.status_code == 200
+
+    def test_endpoint_accepts_uppercase_default_time_parameters(self, valid_pos, valid_min_obs):
+        """Test that defaulted parameters still work with uppercase query names."""
+        response = client.get(f"/ObjObsSAP/query?POS={quote(valid_pos)}&MIN_OBS={quote(valid_min_obs)}")
         assert response.status_code == 200
