@@ -12,7 +12,7 @@ anyio==4.12.1
     #   watchfiles
 astropy==7.2.0
     # via swift-vo (pyproject.toml)
-astropy-iers-data==0.2026.1.26.0.43.56
+astropy-iers-data==0.2026.2.23.0.48.33
     # via astropy
 asyncer==0.0.12
     # via swift-vo (pyproject.toml)
