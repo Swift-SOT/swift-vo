@@ -9,7 +9,6 @@ from astropy.io.votable.tree import (  # type: ignore[import-untyped]
     VOTableFile,
 )
 from astropy.time import Time  # type: ignore[import-untyped]
-from asyncer import asyncify
 from swifttools.swift_too import VisQuery  # type: ignore[import-untyped]
 
 from ..constants import T_MAX_HARD_LIMIT_DELTA
@@ -43,9 +42,10 @@ class ObjObsSAPService:
         This method queries the ObjObsSAP service.
         """
         if self.maxrec != 0:
-            vis_windows = await asyncify(VisQuery)(
-                ra=self.s_ra, dec=self.s_dec, begin=self.t_min, end=self.t_max, hires=True
+            vis_windows = VisQuery(
+                ra=self.s_ra, dec=self.s_dec, begin=self.t_min, end=self.t_max, hires=True, auto_submit=False
             )
+            await vis_windows.get()
             self.windows = [
                 (Time(e.begin).mjd, Time(e.end).mjd)
                 for e in vis_windows.entries
