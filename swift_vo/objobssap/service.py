@@ -12,6 +12,8 @@ from astropy.time import Time  # type: ignore[import-untyped]
 from asyncer import asyncify
 from swifttools.swift_too import VisQuery  # type: ignore[import-untyped]
 
+from ..constants import T_MAX_HARD_LIMIT_DELTA
+
 
 class ObjObsSAPService:
     """
@@ -25,7 +27,12 @@ class ObjObsSAPService:
         self.s_ra = s_ra
         self.s_dec = s_dec
         self.t_min = Time(t_min, format="mjd").datetime
-        self.t_max = Time(t_max, format="mjd").datetime
+        requested_t_max = Time(t_max, format="mjd").datetime
+        hard_limit_mjd = int(Time.now().mjd) + T_MAX_HARD_LIMIT_DELTA
+        hard_limit = Time(hard_limit_mjd, format="mjd").datetime
+        self.t_max_hard_limit_used = requested_t_max > hard_limit
+        self.t_max = min(requested_t_max, hard_limit)
+        self.t_max_hard_limit = hard_limit_mjd
         self.min_obs = min_obs
         self.maxrec = maxrec
         self.upload = upload
@@ -88,6 +95,8 @@ class ObjObsSAPService:
 
         resource.infos.append(Info(name="POS", value=f"{self.s_ra},{self.s_dec}"))
         resource.infos.append(Info(name="TIME", value=f"{Time(self.t_min).mjd}/{Time(self.t_max).mjd}"))
+        if self.t_max_hard_limit_used:
+            resource.infos.append(Info(name="T_MAX_HARD_LIMIT", value=str(self.t_max_hard_limit)))
         if self.min_obs is not None and self.min_obs > 0:
             resource.infos.append(Info(name="MIN_OBS", value=str(self.min_obs)))
         if self.maxrec is not None:
