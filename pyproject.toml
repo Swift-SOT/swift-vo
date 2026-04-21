@@ -15,11 +15,10 @@ dynamic = ["version"]
 requires-python = ">=3.11"
 dependencies = [
     "astropy",
-    "swifttools",
+    "swifttools>=4",
     "fastapi[standard-no-fastapi-cloud-cli]",
     "gunicorn>=23.0.0",
     "uvicorn>=0.34.0",
-    "asyncer>=0.0.8",
     "h11>=0.16.0",
     "vo-models>=0.5.1",
 ]
