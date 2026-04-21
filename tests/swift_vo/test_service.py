@@ -3,6 +3,9 @@ from datetime import datetime
 import pytest  # type: ignore[import-untyped]
 from astropy.time import Time  # type: ignore[import-untyped]
 
+from swift_vo.constants import T_MAX_HARD_LIMIT_DELTA
+from swift_vo.objobssap.service import ObjObsSAPService
+
 
 class TestObjObsSAPService:
     """Test class for ObjObsSAPService which validates initialization and type conversion of parameters."""
@@ -94,6 +97,22 @@ class TestObjObsSAPService:
         """Test if t_validity field is defined in XML."""
         result = await service_with_windows.vo_format()
         assert 'name="t_validity"' in result
+
+    def test_t_max_hard_limit_delta_constant(self):
+        """Test the hard limit delta constant is defined and positive."""
+        assert isinstance(T_MAX_HARD_LIMIT_DELTA, int)
+        assert T_MAX_HARD_LIMIT_DELTA > 0
+
+    @pytest.mark.asyncio
+    async def test_t_max_hard_limit_info_in_xml_when_clamped(self):
+        """Test that a hard limit INFO entry is included when the request is clamped."""
+        now_mjd = int(Time.now().mjd)
+        requested_t_max = now_mjd + T_MAX_HARD_LIMIT_DELTA + 100
+        service = ObjObsSAPService(10.5, 20.3, now_mjd, requested_t_max, 1500)
+        result = await service.vo_format()
+        assert 'name="T_MAX_HARD_LIMIT"' in result
+        assert f'name="T_MAX_HARD_LIMIT" value="{service.t_max_hard_limit}"' in result
+        assert f'name="TIME" value="{Time(service.t_min).mjd}/{Time(service.t_max).mjd}"' in result
 
     @pytest.mark.asyncio
     async def test_field_count_in_xml(self, service_with_windows, expected_fields):
