@@ -20,7 +20,7 @@ dependencies = [
     "gunicorn>=23.0.0",
     "uvicorn>=0.34.0",
     "h11>=0.16.0",
-    "vo-models>=0.5.1",
+    "vo-models>=0.5.3",
 ]
 
 [project.urls]
