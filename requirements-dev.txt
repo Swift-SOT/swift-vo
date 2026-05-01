@@ -68,7 +68,7 @@ httpx==0.28.1
     #   swifttools
 identify==2.6.16
     # via pre-commit
-idna==3.11
+idna==3.13
     # via
     #   anyio
     #   email-validator
