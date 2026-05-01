@@ -122,7 +122,7 @@ pydantic-xml==2.18.0
     # via vo-models
 pyerfa==2.0.1.5
     # via astropy
-pygments==2.19.2
+pygments==2.20.0
     # via rich
 python-dateutil==2.9.0.post0
     # via
