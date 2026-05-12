@@ -233,7 +233,7 @@ uvloop==0.22.1
     # via uvicorn
 virtualenv==20.36.1
     # via pre-commit
-vo-models==0.5.1
+vo-models==0.5.3
     # via swift-vo (pyproject.toml)
 watchfiles==1.1.1
     # via uvicorn

@@ -185,7 +185,7 @@ uvicorn==0.40.0
     #   fastapi-cli
 uvloop==0.22.1
     # via uvicorn
-vo-models==0.5.1
+vo-models==0.5.3
     # via swift-vo (pyproject.toml)
 watchfiles==1.1.1
     # via uvicorn
