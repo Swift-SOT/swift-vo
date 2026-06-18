@@ -68,7 +68,7 @@ httpx==0.28.1
     #   swifttools
 identify==2.6.16
     # via pre-commit
-idna==3.17
+idna==3.18
     # via
     #   anyio
     #   email-validator
@@ -174,7 +174,7 @@ python-dotenv==1.2.2
     # via
     #   pydantic-settings
     #   uvicorn
-python-multipart==0.0.27
+python-multipart==0.0.31
     # via fastapi
 pyyaml==6.0.3
     # via
@@ -197,7 +197,7 @@ shellingham==1.5.4
     # via typer
 six==1.17.0
     # via python-dateutil
-starlette==0.50.0
+starlette==1.3.1
     # via fastapi
 swifttools==4.0.2
     # via swift-vo (pyproject.toml)
