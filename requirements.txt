@@ -15,7 +15,7 @@ astropy==8.0.0
     # via
     #   swift-vo (pyproject.toml)
     #   swifttools
-astropy-iers-data==0.2026.6.15.15.33.16
+astropy-iers-data==0.2026.6.22.1.23.34
     # via astropy
 boto3==1.43.32
     # via swifttools
