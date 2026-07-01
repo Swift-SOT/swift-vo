@@ -15,4 +15,5 @@ jobs:
         run: |
           uv venv
           uv pip install -r requirements-dev.txt
+          echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
       - uses: j178/prek-action@v2
