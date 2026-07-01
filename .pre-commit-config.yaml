@@ -69,6 +69,7 @@ repos:
         language: system
         types: [python]
         files: ^(swift_vo|tests)/
+        require_serial: true # mypy corrupts its cache if run concurrently
         args:
           [
             "--ignore-missing-imports", # Ignore imports without type hints
