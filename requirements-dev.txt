@@ -296,7 +296,7 @@ uvicorn==0.54.0
     #   fastapi-cli
 uvloop==0.23.0
     # via uvicorn
-virtualenv==21.14.11
+virtualenv==21.14.13
     # via pre-commit
 vo-models==0.5.4
     # via swift-vo (pyproject.toml)
