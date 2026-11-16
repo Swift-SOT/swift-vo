@@ -87,3 +87,14 @@ def expected_fields():
 def field(request, expected_fields):
     """Fixture to get expected field names by index."""
     return expected_fields[request.param]
+
+
+# ObsLocTAP fixtures
+@pytest.fixture
+def obsloctap_query_params(valid_pos, valid_time, valid_maxrec):
+    """Common query parameters for ObsLocTAP endpoint tests."""
+    return {
+        "pos": valid_pos,
+        "time": valid_time,
+        "maxrec": valid_maxrec,
+    }
